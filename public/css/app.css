@@ -347,6 +347,58 @@
   .btn-facebook:hover {
     background: #0066aa;
   }
+  form .input {
+    position: relative;
+  }
+  form .input-failed {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    background: url("./attention.svg") no-repeat;
+    background-position: center center;
+    background-size: contain;
+    right: 5px;
+    top: 13px;
+    cursor: pointer;
+  }
+  form .btn-loading {
+    position: relative;
+    background: transparent;
+    color: transparent;
+    width: 40px;
+    height: 40px;
+    display: block;
+    margin: 2px auto;
+    padding: 0;
+    border: 0;
+    animation: btn-loading-rotate .6s infinite;
+  }
+  form .btn-loading:after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 5px solid transparent;
+    border-right-color: #0066ff;
+    top: 0;
+    left: 0;
+  }
+  form .btn-loading:before {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 5px solid transparent;
+    border-left-color: #0066ff;
+    top: 0;
+    right: 0;
+  }
+  .alert {
+    padding: 5px;
+    margin-bottom: 5px;
+  }
 }
 
 @media screen and (min-width: 480px) and (max-width: 768px) {
@@ -519,5 +571,29 @@
   }
   to {
     width: calc(100% - 50px);
+  }
+}
+
+@keyframes btn-loading-rotate {
+  from {
+    transform: rotate(1turn);
+    -moz-transform: rotate(1turn);
+    -webkit-transform: rotate(1turn);
+  }
+}
+
+@-moz-keyframes btn-loading-rotate {
+  from {
+    transform: rotate(1turn);
+    -moz-transform: rotate(1turn);
+    -webkit-transform: rotate(1turn);
+  }
+}
+
+@-webkit-keyframes btn-loading-rotate {
+  from {
+    transform: rotate(1turn);
+    -moz-transform: rotate(1turn);
+    -webkit-transform: rotate(1turn);
   }
 }

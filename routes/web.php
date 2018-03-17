@@ -12,9 +12,9 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/register', 'HomeController@register')->name('register');
+Route::match(['GET', 'POST'], '/register', 'HomeController@register')->name('register');
 Route::group(['prefix' => 'login'], function(){
-    Route::get('/', 'HomeController@login')->name('login');
+    Route::match(['GET', 'POST'], '/', 'HomeController@login')->name('login');
     Route::get('/facebook', 'HomeController@loginFacebook')->name('login.facebook');
 });
 

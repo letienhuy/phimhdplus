@@ -2,8 +2,13 @@
 @section('content')
 <div class="login-dialog">
     <form id="login-form">
-        <input type="email" placeholder="Email"/>
-        <input type="password" placeholder="Mật khẩu"/>
+        <div id="result"></div>
+        <div class="input">
+            <input type="email" name="email" placeholder="Email"/>
+        </div>
+        <div class="input">
+            <input type="password" name="password" placeholder="Mật khẩu"/>
+        </div>
         <button class="btn">Đăng nhập</button>
     </form>
     <a href="{{route('register')}}">

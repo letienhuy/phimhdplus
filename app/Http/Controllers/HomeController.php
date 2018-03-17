@@ -2,18 +2,10 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-
+use App\User;
 class HomeController extends Controller
 {
-    // /**
-    //  * Create a new controller instance.
-    //  *
-    //  * @return void
-    //  */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+
 
     /**
      * Show the application dashboard.
@@ -24,12 +16,18 @@ class HomeController extends Controller
     {
         return view('home.index');
     }
-    public function register()
+    public function register(Request $request)
     {
         return view('home.register');
     }
-    public function login()
+    public function login(Request $request)
     {
+        if($request->method() === "POST"){
+            $user = User::where('email', $request->email)->first();
+            if(is_null($user)){
+                return response()->json(['message' => 'Email này không tồn tại!'], 422);
+            }
+        }
         return view('home.login');
     }
     public function loginFacebook()

@@ -21,6 +21,8 @@ class CreateFilmTable extends Migration
             $table->text('actor');
             $table->text('director');
             $table->text('category');
+            $table->integer('is_slide')->default(0); //1 slide - 0 no
+            $table->integer('disable')->default(0); //1 slide - 0 no
             $table->integer('type'); //1 phim le - 2 phim bo
             $table->integer('view');
             $table->integer('episode');

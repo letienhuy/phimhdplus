@@ -18,6 +18,7 @@ class CreateCategoryTable extends Migration
             $table->string('name');
             $table->integer('type'); // 1 phim le - 2 phim bo
             $table->integer('parent_id')->default(0);
+            $table->integer('disable')->default(0);
             $table->timestamps();
         });
     }

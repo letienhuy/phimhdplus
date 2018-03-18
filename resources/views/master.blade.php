@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/app.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/swiper.min.css')}}">
     <title></title>
 </head>
 <body id="root">
@@ -39,6 +40,7 @@
     </footer>
 <script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
+<script src="{{asset('js/swiper.min.js')}}"></script>
 <script src="{{asset('js/app.js')}}"></script>
 </body>
 </html>

@@ -12,9 +12,12 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::match(['GET', 'POST'], '/register', 'HomeController@register')->name('register');
-Route::group(['prefix' => 'login'], function(){
+Route::match(['GET', 'POST'], '/register', 'HomeController@register')->name('register')->middleware('guest');
+Route::group(['prefix' => 'login', 'middleware' => 'guest'], function(){
     Route::match(['GET', 'POST'], '/', 'HomeController@login')->name('login');
     Route::get('/facebook', 'HomeController@loginFacebook')->name('login.facebook');
 });
-
+Route::get('/logout', function(){
+    Auth::logout();
+    return redirect()->route('home');
+})->name('logout')->middleware('auth');

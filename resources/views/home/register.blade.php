@@ -1,8 +1,8 @@
 @extends('master')
 @section('content')
 <div class="login-dialog">
+    <div id="result"></div>
     <form id="register-form">
-        <div id="result"></div>
         <div class="input">
             <input type="email" name="email" placeholder="Email" required/>
         </div>

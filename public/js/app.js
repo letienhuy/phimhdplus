@@ -35,6 +35,8 @@ $(document).ready(function(){
 });
 $(document).on('submit', '#login-form', function(event){
     event.preventDefault();
+    inputFailed.remove();
+    error.remove();
     var email = $('input[name=email]');
     var password = $('input[name=password]');
     var btn = $(this).children('.btn');
@@ -47,6 +49,11 @@ $(document).on('submit', '#login-form', function(event){
         type: 'POST',
         success: function(res){
             btn.attr('class', 'btn');
+            $("#login-form").remove();
+            success.text(res.message).appendTo('#result');
+            setTimeout(function(){
+                location.href = res.redirectUrl;
+            }, 2000);
         },
         error: function(err){
             btn.attr('class', 'btn');
@@ -56,16 +63,19 @@ $(document).on('submit', '#login-form', function(event){
 });
 $(document).on('submit', '#register-form', function(event){
     event.preventDefault();
+    inputFailed.remove();
+    error.remove();
     var email = $('input[name=email]');
     var password = $('input[name=password]');
     var confirmPassword = $('input[name=confirm_password]');var btn = $(this).children('.btn');
     var data = new FormData(this);
     btn.attr('class', 'btn-loading');
-    if(email === ""){
+    if(email.val() === ""){
         btn.attr('class', 'btn');
+        inputFailed.appendTo(email.parent());
         error.text("Vui lòng nhập email!").appendTo('#result');
         return false;
-    } else if(password === ""){
+    } else if(password.val() === ""){
         btn.attr('class', 'btn');
         error.text("Vui lòng nhập mật khẩu!").appendTo('#result');
         return false;
@@ -77,6 +87,11 @@ $(document).on('submit', '#register-form', function(event){
         type: 'POST',
         success: function(res){
             btn.attr('class', 'btn');
+            $("#register-form").remove();
+            success.text(res.message).appendTo('#result');
+            setTimeout(function(){
+                location.href = res.redirectUrl;
+            }, 2000);
         },
         error: function(err){
             btn.attr('class', 'btn');

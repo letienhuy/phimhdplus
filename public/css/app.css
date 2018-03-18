@@ -301,7 +301,7 @@
   .login-dialog form#register-form input[type=password] {
     border-bottom: 1px solid #ddd;
   }
-  .login-dialog form#register-form input[type=confirm_password] {
+  .login-dialog form#register-form input[name=confirm_password] {
     border-radius: 0 0 5px 5px;
   }
   .login-dialog .login-choose {
@@ -597,3 +597,4 @@
     -webkit-transform: rotate(1turn);
   }
 }
+/*# sourceMappingURL=app.css.map */

@@ -1,5 +1,6 @@
 ﻿var homeUrl = $('base').attr('href');
-var errorAlert = $('<div/>').addClass('alert alert-danger');
+var error = $('<div/>').addClass('alert alert-danger');
+var success = $('<div/>').addClass('alert alert-success');
 var csrfToken = $('meta[name="csrf-token"]').attr('content');
 var inputFailed = $('<span/>').addClass('input-failed').tooltip();
 $.ajaxSetup({
@@ -49,7 +50,7 @@ $(document).on('submit', '#login-form', function(event){
         },
         error: function(err){
             btn.attr('class', 'btn');
-            errorAlert.text(err.responseJSON.message).appendTo('#result');
+            error.text(err.responseJSON.message).appendTo('#result');
         }
     });
 });
@@ -57,5 +58,29 @@ $(document).on('submit', '#register-form', function(event){
     event.preventDefault();
     var email = $('input[name=email]');
     var password = $('input[name=password]');
-    var confirmPassword = $('input[name=confirm_password]');
+    var confirmPassword = $('input[name=confirm_password]');var btn = $(this).children('.btn');
+    var data = new FormData(this);
+    btn.attr('class', 'btn-loading');
+    if(email === ""){
+        btn.attr('class', 'btn');
+        error.text("Vui lòng nhập email!").appendTo('#result');
+        return false;
+    } else if(password === ""){
+        btn.attr('class', 'btn');
+        error.text("Vui lòng nhập mật khẩu!").appendTo('#result');
+        return false;
+    }
+    $.ajax({
+        url: homeUrl + '/register',
+        data: $(this).serialize(),
+        processData: false,
+        type: 'POST',
+        success: function(res){
+            btn.attr('class', 'btn');
+        },
+        error: function(err){
+            btn.attr('class', 'btn');
+            error.text(err.responseJSON.message).appendTo('#result');
+        }
+    });
 });

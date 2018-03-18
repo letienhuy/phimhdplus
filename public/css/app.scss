@@ -313,7 +313,7 @@ $title_color: rgb(255, 94, 0);
             input[type=password]{
                 border-bottom: 1px solid #ddd;
             }
-            input[type=confirm_password]{
+            input[name=confirm_password]{
                 border-radius: 0 0 5px 5px;
             }
         }

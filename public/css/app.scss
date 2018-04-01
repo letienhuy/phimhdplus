@@ -20,15 +20,6 @@ $title_color: rgb(255, 94, 0);
         margin: 0;
         padding: 0;
     }
-    #root{
-        width: 100%;
-        height: 100%;
-        background: #111;
-        & > div{
-            width: 100%;
-            height: 100%;
-        }
-    }
     header{
         width: 100%;
         height: 50px;
@@ -212,6 +203,9 @@ $title_color: rgb(255, 94, 0);
                 margin: 4px 0;
                 text-transform: uppercase;
                 color: $title_color;
+                a{
+                    color: $title_color;                    
+                }
                 &:after{
                     content: '';
                     position: absolute;
@@ -233,6 +227,9 @@ $title_color: rgb(255, 94, 0);
                     line-height: 30px;
                     text-transform: none;
                     color: $third_color;
+                    a{
+                        color: $third_color;                        
+                    }
                     &:after{
                         content: '';
                         position: absolute;
@@ -247,9 +244,220 @@ $title_color: rgb(255, 94, 0);
             }
         }       
     }
+    .slide-home{
+        width: 100%;
+        height: 200px;
+        position: relative;
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+        }
+        .swiper-slide {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center center;
+        }
+        .play{
+            display: block;
+        }
+        .thumb{
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .swiper-button-prev,
+    .swiper-button-next{
+        display: none;
+    }
+    .swiper-container{
+        &:hover{
+            .swiper-button-prev,
+            .swiper-button-next{
+                display: block;
+            }
+        }
+    }
+    h1{
+        font-weight: bold;
+        font-size: 1.5em;
+        margin: 0;
+        padding: 0;
+        margin: 10px 0;
+        padding: 5px 0;
+        border-bottom: 1px solid #333;
+    }
+    .film-detail{
+        span{
+            display: block;
+            line-height: 30px;
+            color: $fifth_color;
+        }
+        .film-about{
+            line-height: 25px;
+            padding: 10px;
+            font-size: 15px;
+        }
+    }
+    .film-action{
+        padding: 5px;
+        .off-ads{
+            background: $title_color;
+            padding: 5px;
+            border: 0;
+            border-radius: 4px;
+            &:hover{
+                background: rgb(153, 56, 0);                
+            }
+        }
+        .report{
+            background: rgb(190, 14, 14);
+            padding: 5px;
+            border: 0;
+            border-radius: 4px;
+            &:hover{
+                background: rgb(145, 0, 0);
+            }
+        }
+    }
+    .film-eposide{
+        padding: 10px;
+        cursor: pointer;
+        span{
+            padding: 5px;
+            text-align: center;
+            border: 1px solid $fifth_color;
+            display: inline-block;
+            min-width: 30px;
+            border-radius: 4px;
+            &:hover{
+                background: $fifth_color;
+                color: #000;
+            }
+        }
+        .active{
+            background: $fifth_color;
+            color: #000;
+        }
+    }
+    .list-film{
+        width: 100%;
+        height: auto;
+        background: $third_color;
+        padding: 10px;
+        margin: 5px 0;
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+        }
+        .swiper-slide {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center center;
+        }
+        .list-item{
+            width: 100%;
+            height: 0;
+            padding-top: 125%;
+            background: #fff;
+            position: relative;
+            cursor: pointer;
+            .thumb{
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background-image: none;
+                background-size: cover;
+                background-position: center center;
+                background-repeat: no-repeat;
+                z-index: 9;
+            }
+            .episode{
+                height: 25px;
+                padding: 0 3px;
+                white-space: nowrap;
+                position: absolute;
+                right: 5px;
+                top: 5px;
+                z-index: 99;
+                text-align: center;
+                line-height: 25px;
+                background: $third_color;
+                opacity: 0.8;
+                border-radius: 4px;
+                font-weight: bold;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+            .film-name {
+                width: 100%;
+                height: 30px;
+                line-height: 20px;
+                position: absolute;
+                white-space: normal;
+                font-size: 13px;
+                bottom: 0;
+                left: 0;
+                white-space: nowrap;
+                z-index: 99;
+                font-weight: bold;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                padding: 5px;
+                a{
+                    text-decoration: none;
+                    color: $fifth_color;
+                }
+            }
+            &:hover{
+                .play{
+                    display: block;
+                }
+                .film-name a{
+                    color: $fourth_color;
+                }
+            }
+            .black-gradient{
+                background: -webkit-linear-gradient(to bottom,rgba(255,0,0,0),#000);
+                background: -o-linear-gradient(to bottom,rgba(255,0,0,0),#000);
+                background: -moz-linear-gradient(to bottom,rgba(255,0,0,0),#000);
+                background: linear-gradient(to bottom,rgba(255,0,0,0),#000);
+                width: 100%;
+                height: 50%;
+                bottom: 0;
+                position: absolute;
+                z-index: 99;
+            }
+        }
+    }
     .slide-toggle{
         left: 0;
         transition: left .2s ease;
+    }
+    .play{
+        width: 80px;
+        height: 80px;
+        background: url('./play.png') no-repeat;
+        background-size: cover;
+        background-position: center center;
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 99;
+    }
+    #player{
+        width: 100%;
+        height: 200px;
+        span{
+            text-align: center;
+            display: block;
+            font-size: 16px;
+        }
     }
     .over{
         position: fixed;
@@ -261,11 +469,15 @@ $title_color: rgb(255, 94, 0);
     }
     #content{
         width: 100%;
-        height: 100%;
+        min-height: 100%;
         z-index: 99;
-        padding: 50px 10px;
+        padding: 60px 0;
         padding-bottom: 0;
         color: #fff;
+        background: #111;
+    }
+    .container{
+        padding: 0;
     }
     .login-dialog{
         width: 300px;
@@ -343,7 +555,7 @@ $title_color: rgb(255, 94, 0);
           }
         }
     }
-    .btn{
+    .button{
         height: 40px;
         border-radius: 5px;
         background: $primary_color;
@@ -355,10 +567,13 @@ $title_color: rgb(255, 94, 0);
         display: block;
         margin: 2px auto;
     }
+    .btn-inline{
+        display: inline-block !important;
+    }
     .btn-facebook{
-        background: $primary_color;
+        background: #4267b2;
         &:hover{
-            background: $secondary_color;
+            background: #29487d;
         }
     }
     form{
@@ -446,8 +661,11 @@ $title_color: rgb(255, 94, 0);
         height: 100px;
     }
     #content{
-        padding-top: 80px;
-        padding-bottom: 100px;
+        padding-top: 90px;
+        padding-bottom: 10px;
+    }
+    .slide-home{
+        height: 400px;
     }
     .slide{
         position: fixed;
@@ -512,6 +730,9 @@ $title_color: rgb(255, 94, 0);
                 padding: 5px 15px;
                 cursor: pointer;
                 color: $fourth_color;
+                a{
+                    color: $fourth_color;                    
+                }
                 &:after{
                     width: 14px;
                     height: 14px;
@@ -547,6 +768,9 @@ $title_color: rgb(255, 94, 0);
                     line-height: 20px;
                     padding: 5px 10px;
                     color: $fourth_color;
+                    a{
+                        color: $fourth_color;                        
+                    }
                     &:after{
                         width: 10px;
                         height: 10px;
@@ -560,6 +784,14 @@ $title_color: rgb(255, 94, 0);
     .login-dialog{
         width: 350px;
         max-height: 450px;
+    }
+    .film-detail{
+        .film-about{
+            font-size: 17px;
+        }
+    }
+    #player{
+        height: 450px;
     }
 }
 //Keyframe

@@ -3,7 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use View;
+use App\Setting;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -14,6 +15,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        View::composer('master', function ($view) {
+            $view->with(['setting' => Setting::find(1)]);
+        });
     }
 
     /**

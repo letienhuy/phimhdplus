@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
+use App\Film;
 use Auth;
 use Hash;
 class HomeController extends Controller
@@ -16,7 +17,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home.index');
+        $slide = Film::where('is_slide', 1)->get();
+        $film = Film::all(); 
+        return view('home.index', ['slide' => $slide, 'film' => $film]);
     }
     public function register(Request $request)
     {

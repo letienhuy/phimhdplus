@@ -1,11 +1,26 @@
 <div class="slide">
     <div class="slide-user">
     <span class="icon-user"></span>
-    <span class="slide-collapse">
+    <div class="visible-xs">
         @if (Auth::check())
-            <a href="{{route('logout')}}"><button class="btn">Thoát</button></a>
+            <a href="{{route('logout')}}">
+                <button class="button">Đăng xuất</button>
+            </a>
         @else
-            <a href="{{route('login')}}"><button class="btn">Đăng nhập | Đăng ký</button></a>
+            <a href="{{route('login', ['redirectUrl' => url()->current()])}}">
+                <button class="button">Đăng nhập</button>
+            </a>
+        @endif
+    </div>
+    <span class="slide-collapse hidden-xs">
+        @if (Auth::check())
+            <a href="{{route('logout')}}">
+                <button class="button">Đăng xuất</button>
+            </a>
+        @else
+            <a href="{{route('login', ['redirectUrl' => url()->current()])}}">
+                <button class="button">Đăng nhập</button>
+            </a>
         @endif
     </span>
     </div>

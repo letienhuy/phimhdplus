@@ -17,8 +17,12 @@ class CreateFilmDetailTable extends Migration
             $table->increments('id');
             $table->integer('film_id');
             $table->string('name');
-            $table->string('source');
-            $table->string('source_vip');
+            $table->string('source1')->nullable();
+            $table->string('source2')->nullable();
+            $table->string('source3')->nullable();
+            $table->string('source_vip1')->nullable();
+            $table->string('source_vip2')->nullable();
+            $table->string('source_vip3')->nullable();
             $table->timestamps();
         });
     }

@@ -3,6 +3,7 @@
 <div class="login-dialog">
     <div id="result"></div>
     <form id="register-form">
+        <input type="hidden" name="redirectUrl" value="{{request()->redirectUrl}}">
         <div class="input">
             <input type="email" name="email" placeholder="Email" required/>
         </div>
@@ -12,12 +13,12 @@
         <div class="input">
             <input type="password" name="confirm_password" placeholder="Nhập lại mật khẩu"/>
         </div>
-        <button class="btn">Đăng ký</button>
+        <button class="button">Đăng ký</button>
     </form>
     <a href="{{route('login')}}">
-        <button class="btn">Đăng nhập tài khoản</button>
+        <button class="button">Đăng nhập tài khoản</button>
     </a>
     <span class="login-choose">hoặc</span>
-    <button class="btn btn-facebook">Đăng nhập bằng Facebook</button>
+    <a href="{{route('login.facebook')}}"><button class="button btn-facebook">Đăng nhập bằng Facebook</button></a>
 </div>
 @endsection

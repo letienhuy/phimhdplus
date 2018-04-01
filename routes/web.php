@@ -21,3 +21,9 @@ Route::get('/logout', function(){
     Auth::logout();
     return redirect()->route('home');
 })->name('logout')->middleware('auth');
+Route::get('/the-loai/{id}-{uri}', 'DetailController@category')->name('category');
+Route::get('/phim/{id}-{uri}', 'DetailController@detail')->name('film');
+Route::get('/phim/{id}-{uri}/view', 'DetailController@viewFilm')->name('film.view');
+Route::group(['prefix' => 'ajax'], function(){
+    Route::get('/source/{id}', 'DetailController@getSource');
+});

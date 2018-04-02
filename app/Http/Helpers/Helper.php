@@ -56,12 +56,27 @@ class Helper{
         }
         return $html;
     }
+
     public static function listCategory($categories){
         $html = "";
         $categories = json_decode($categories, true);
         foreach($categories as $id){
             $category = Category::find($id);
             $html .= '<a href="'.route('category', ['uri' => self::beauty($category->name), 'id' => $category->id]).'">'.$category->name.'</a>, ';            
+        }
+        return trim($html, ', ');
+    }
+
+    public static function tags($film){
+        $html = "";
+        if($film->tags === ""){
+            $html .= '<a href="'.route('tag', ['key' => $film->name]).'">'.$film->name.'</a>';            
+            return $html;
+        } else {
+            $keys = explode(',', $film->tags);
+            foreach($keys as $key){
+                $html .= '<a href="'.route('tag', ['key' => trim($key, " ")]).'">'.$key.'</a>, ';            
+            }
         }
         return trim($html, ', ');
     }

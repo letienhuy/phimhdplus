@@ -18,7 +18,7 @@
     <link href="{{asset('css/video-js.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/app.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/swiper.min.css')}}">
-    <script src="{{asset('js/jwplayer.js')}}"></script>
+    <script src="https://content.jwplatform.com/libraries/90pS7TYy.js"></script>
     <script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
     <script src="{{asset('js/swiper.min.js')}}"></script>
@@ -59,15 +59,5 @@
     <footer>
         Copyright: {{date("Y")}}
     </footer>
-<script>
-    var swiper = new Swiper('.swiper-container', {
-      pagination: {
-        el: '.swiper-pagination',
-      },
-      autoplay: {
-        delay: 5000,
-    },
-    });
-  </script>
 </body>
 </html>

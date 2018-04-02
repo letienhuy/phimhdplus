@@ -15,20 +15,33 @@
                 <div class="fb-like" data-href="{{url()->current()}}" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
                 <div class="film-detail">
                     <a href="{{route('film.view', ['uri' => Help::beauty($film->name), 'id' => $film->id])}}">
-                    <button class="btn btn-inline btn-success">XEM PHIM</button>
+                    <button class="btn btn-inline btn-success">
+                        <i class="fa fa-play-circle"></i>
+                        XEM PHIM
+                    </button>
                     </a>              
                     @if (Auth::check())
-                        <a href="{{route('film.view', ['uri' => Help::beauty($film->name), 'id' => $film->id])}}">
-                        <button class="btn btn-inline btn-danger">DOWNLOAD</button>
+                        <a href="{{route('film.download', ['uri' => Help::beauty($film->name), 'id' => $film->id])}}">
+                        <button class="btn btn-inline btn-danger">
+                            <i class="fa fa-download"></i>    
+                            DOWNLOAD
+                        </button>
                         </a>
+                        @if (count(App\Like::where([['user_id', Auth::id()], ['film_id', $film->id]])->get()) === 0)
+                            <button class="btn btn-inline btn-primary">
+                                <i class="fa fa-heart"></i>
+                                Thêm vào danh sách yêu thích
+                            </button>
+                        @endif
                     @endif              
+                    <span>Lượt xem: {{$film->view}}</span>
                     <span>Đạo  diễn: {{$film->director}}</span>
                     <span>Diễn viên: {{$film->actor}}</span>
                     @if ($film->type === 2)
                         <span>Số tập: {{sizeof($film->filmDetail)}}/{{$film->episode}}</span>
                     @endif
                     <span>Thể  loại: {!! Help::listCategory($film->category) !!}</span>
-                    <span>Tags: </span>
+                    <span>Tags: {!! Help::tags($film) !!}</span>
                     <div class="film-about">
                         {{$film->about}}
                     </div>

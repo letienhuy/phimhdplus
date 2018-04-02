@@ -4,30 +4,46 @@
         <div class="col-md-9">
             @if (count($film->filmDetail) === 0)
                 <div id="player">
-                    <span>
-                        Có lỗi xảy ra! Không tìm thấy source phim
-                    </span>
+                    <script>
+                        play('','');
+                    </script>
                 </div>
             @else
                 <div id="player"></div>
+                <script>
+                    play({
+                        m18: '{{$film->filmDetail->first()->source1}}',
+                        m22: '{{$film->filmDetail->first()->source2}}',
+                        m36: '{{$film->filmDetail->first()->source3}}',
+                    }, '{{$film->poster}}', '{{$film->filmDetail->first()->name}}');
+                </script>
             @endif
             <div class="film-action">
                 @if (!Auth::check() || Auth::check() && !Auth::user()->vip)
-                    <button class="off-ads">Tắt Quảng Cáo</button>
+                    <button class="off-ads">
+                        <i class="fa fa-toggle-off"></i>
+                        Tắt Quảng Cáo
+                    </button>
                 @endif
-                <button class="report">Báo lỗi</button>
+                <button class="report" data-film="{{$film->id}}">
+                    <i class="fa fa-flag-checkered"></i>
+                    Báo lỗi
+                </button>
             </div>
-            <script>
-                play({
-                    m18: '{{$film->filmDetail->first()->source1}}',
-                    m22: '{{$film->filmDetail->first()->source2}}',
-                    m36: '{{$film->filmDetail->first()->source3}}',
-                }, '{{$film->poster}}', '{{$film->filmDetail->first()->name}}');
-            </script>
             <div class="list-film">
                 <h1 class="title" style="color: rgb(255, 94, 0);">
                     {{$film->name}}
                 </h1>
+                <div class="film-vote">
+                    <span>Đánh Giá Phim Này</span>
+                    <div class="list-star">
+                        <span class="star-white"></span>
+                        <span class="star-white"></span>
+                        <span class="star-white"></span>
+                        <span class="star-white"></span>
+                        <span class="star-white"></span>
+                    </div>
+                </div>
                 <div class="fb-like" data-href="{{url()->current()}}" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
                 @if ($film->type === 2)
                     <div class="film-eposide">

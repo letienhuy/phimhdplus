@@ -114,6 +114,68 @@ $(document).on('click', '.film-eposide span', function(){
         }
     });
 });
+$(document).on('click', '.over, .closex', function(){
+    $('.login-dialog').remove();
+    $('.over').remove();
+});
+$(document).on('click', '.report', function(){
+    var id = $(this).data('film');
+    $.ajax({
+        url: homeUrl + '/ajax/report/'+id,
+        processData: false,
+        success: function(res){
+            $('<div/>').addClass('over').appendTo('body');
+            $('body').append(res);
+        }
+    });
+});
+$(document).on('submit', '#report-form', function(event){
+    event.preventDefault();
+    error.remove();
+    var email = $('input[name=email]');
+    var message = $('input[name=message]');
+    var id = $('input[name=film]');
+    var btn = $(this).children('.button');
+    var data = new FormData(this);
+    btn.attr('class', 'btn-loading');
+    $.ajax({
+        url: homeUrl + '/ajax/report/'+id,
+        data: $(this).serialize(),
+        processData: false,
+        type: 'POST',
+        success: function(res){
+            btn.attr('class', 'button');
+            $("#report-form").remove();
+            success.text(res.message).appendTo('#result');
+        },
+        error: function(err){
+            btn.attr('class', 'button');
+            error.text(err.responseJSON.message).appendTo('#result');
+        }
+    });
+});
+var selected = false;
+$(document).on('click', '.star-white', function(e){
+    var index = $(this).index();
+    $('.list-star').children().removeClass('star');    
+    for(var i = 0; i <= index; i++){
+        $('.list-star .star-white:eq('+i+')').addClass('star');
+    }
+    selected = true;
+});
+$(document).on('mouseover', '.star-white', function(e){
+    var index = $(this).index();
+    for(var i = 0; i <= index; i++){
+        $('.list-star .star-white:eq('+i+')').addClass('star');
+    }
+    selected = false;
+});
+$(document).on('mouseleave', '.star-white', function(e){
+    if(selected){
+        return false;
+    }
+    $('.list-star').children().removeClass('star');
+});
 function play(source, poster, title){
     $('#player').children().remove();
     jwplayer('player').setup({

@@ -16,6 +16,7 @@ class CreateReportTable extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('film_id');
+            $table->string('email');
             $table->text('messages');
             $table->timestamps();
         });

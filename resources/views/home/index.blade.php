@@ -17,7 +17,7 @@
                         @endforeach
                     </div>
                     <!-- If we need pagination -->
-                    <div class="swiper-pagination"></div>
+                    <div id="swiper-home" class="swiper-pagination"></div>
                     </div>
                 </div>
                 <div class="list-film">
@@ -153,11 +153,14 @@
     <script>
         var swiper = new Swiper('.slide-home .swiper-container', {
             pagination: {
-            el: '.swiper-pagination',
+                el: '.swiper-pagination',
+                type: 'progressbar',
             },
             autoplay: {
             delay: 5000,
         },
+        });
+        var swiperFilm = new Swiper('.list-film .swiper-container', {
         });
     </script>
 @endsection

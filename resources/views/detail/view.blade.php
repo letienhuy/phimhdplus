@@ -34,16 +34,20 @@
                 <h1 class="title" style="color: rgb(255, 94, 0);">
                     {{$film->name}}
                 </h1>
-                <div class="film-vote">
-                    <span>Đánh Giá Phim Này</span>
-                    <div class="list-star">
-                        <span class="star-white"></span>
-                        <span class="star-white"></span>
-                        <span class="star-white"></span>
-                        <span class="star-white"></span>
-                        <span class="star-white"></span>
-                    </div>
-                </div>
+                @if (Auth::check())
+                    @if (count(App\Vote::where([['film_id', $film->id], ['user_id', Auth::id()]])->get()) === 0)
+                        <div class="film-vote">
+                            <span>Đánh Giá Phim Này</span>
+                            <div class="list-star" data-id="{{$film->id}}">
+                                <span class="star-white"></span>
+                                <span class="star-white"></span>
+                                <span class="star-white"></span>
+                                <span class="star-white"></span>
+                                <span class="star-white"></span>
+                            </div>
+                        </div>
+                    @endif
+                @endif
                 <div class="fb-like" data-href="{{url()->current()}}" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
                 @if ($film->type === 2)
                     <div class="film-eposide">

@@ -17,13 +17,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $slide = Film::where('is_slide', 1)->get();
         $filmBo = Film::where([['type', 2], ['disable', 0]])->get(); 
         $filmLe = Film::where([['type', 1], ['disable', 0]])->get(); 
         $filmNew = Film::where('disable', 0)->orderBy('id', 'DESC')->get(); 
         $filmMostView = Film::where('disable', 0)->orderBy('view', 'DESC')->get();
         return view('home.index', [
-            'slide' => $slide,
             'filmBo' => $filmBo,
             'filmLe' => $filmLe,
             'filmNew' => $filmNew,

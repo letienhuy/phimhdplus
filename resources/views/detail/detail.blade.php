@@ -28,12 +28,24 @@
                         </button>
                         </a>
                         @if (count(App\Like::where([['user_id', Auth::id()], ['film_id', $film->id]])->get()) === 0)
-                            <button class="btn btn-inline btn-primary">
+                            <button id="like-button" data-id="{{$film->id}}" class="btn btn-inline btn-primary">
                                 <i class="fa fa-heart"></i>
-                                Thêm vào danh sách yêu thích
+                                <span>Yêu thích</span>
+                            </button>
+                        @else
+                            <button id="like-button" style="color: #f00" data-id="{{$film->id}}" class="btn btn-inline btn-primary">
+                                <i class="fa fa-heart"></i>
+                                <span>Đã thích</span>
                             </button>
                         @endif
-                    @endif              
+                    @endif
+                    <span>Đánh giá:
+                        @if (count($film->vote) === 0)
+                            5/5
+                        @else
+                            {{round($film->vote->sum('point')/count($film->vote))}}/5
+                        @endif
+                        <i class="fa fa-star" style="color: #ED8A19"></i> ({{count($film->vote)}} votes)</span>           
                     <span>Lượt xem: {{$film->view}}</span>
                     <span>Đạo  diễn: {{$film->director}}</span>
                     <span>Diễn viên: {{$film->actor}}</span>

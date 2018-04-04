@@ -154,21 +154,59 @@ $(document).on('submit', '#report-form', function(event){
         }
     });
 });
+$(document).on('click', '#like-button', function(event){
+    var id = $(this).data('id');
+    var _this = this;
+    $.ajax({
+        url: homeUrl + '/ajax/like/'+id,
+        processData: false,
+        success: function(res){
+            if(res.code){
+                $(_this).css({
+                    color: '#f00'
+                });
+                $(_this).children('span').text('Đã thích');
+            } else {
+                $(_this).css('color', '');
+                $(_this).children('span').text('Yêu thích');                
+            }
+        }
+    });
+});
 var selected = false;
 $(document).on('click', '.star-white', function(e){
+    if(selected){
+        return false;
+    }
     var index = $(this).index();
+    var id = $(this).parent().data('id');
     $('.list-star').children().removeClass('star');    
     for(var i = 0; i <= index; i++){
         $('.list-star .star-white:eq('+i+')').addClass('star');
     }
-    selected = true;
+    $.ajax({
+        url: homeUrl + '/ajax/vote/'+id,
+        type: "POST",
+        data: {'point': ++index},
+        async: false,
+        success: function(res){
+            if(res.code){
+                selected = true;
+            }
+        },
+        error: function(err){
+            console.log(err);
+        }
+    });
 });
 $(document).on('mouseover', '.star-white', function(e){
+    if(selected){
+        return false;
+    }
     var index = $(this).index();
     for(var i = 0; i <= index; i++){
         $('.list-star .star-white:eq('+i+')').addClass('star');
     }
-    selected = false;
 });
 $(document).on('mouseleave', '.star-white', function(e){
     if(selected){

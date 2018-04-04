@@ -21,6 +21,7 @@
             <span style="color:red">Credit: {{Auth::user()->credit}}</span>
             <span><a href="">Nạp Credit</a></span>
             <span><a href="">Yêu cầu phim</a></span>
+            <span><a href="{{route('user.info')}}">Danh sách yêu thích</a></span>
             @if (!Auth::user()->vip)
                 <span><a href="">Nâng cấp VIP</a></span>                
             @endif

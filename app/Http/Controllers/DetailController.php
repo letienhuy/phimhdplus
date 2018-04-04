@@ -5,12 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Film;
 use App\FilmDetail;
+use App\Like;
+use App\Vote;
 use App\Report;
+use App\Category;
 use Auth;
 class DetailController extends Controller
 {
     public function category($id){
-        return $id;
+        $category = Category::findOrFail($id);
+        $film = Film::where([['category', 'like', '%'.$category->id.'%'], ['disable', 0]])->get();
+        return view('detail.category', ['category' => $category, 'film' => $film]);
     }
     public function detail($id){
         $film = Film::findOrFail($id);
@@ -25,6 +30,34 @@ class DetailController extends Controller
     public function download($id){
         $film = Film::findOrFail($id);
         return view('detail.download', ['film' => $film]);
+    }
+    public function like($id){
+        $film = Film::findOrFail($id);
+        $like = Like::where([['film_id', $id], ['user_id', Auth::id()]])->first();
+        if(is_null($like)){
+            $like = new Like;
+            $like->film_id = $film->id;
+            $like->user_id = Auth::id();
+            $like->save();
+            return response()->json(['code' => 1]);
+        } else {
+            $like->delete();
+            return response()->json(['code' => 0]);            
+        }
+    }
+    public function vote(Request $request, $id){
+        $film = Film::findOrFail($id);
+        $vote = Vote::where([['film_id', $id], ['user_id', Auth::id()]])->first();
+        if(is_null($vote)){
+            $vote = new Vote;
+            $vote->film_id = $film->id;
+            $vote->user_id = Auth::id();
+            $vote->point = $request->point;
+            $vote->save();
+            return response()->json(['code' => 1]);            
+        } else {
+            return response()->json(['code' => 0]);                    
+        }
     }
     public function report(Request $request, $id){
         if($request->method() === "POST"){

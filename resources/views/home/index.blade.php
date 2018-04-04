@@ -22,126 +22,84 @@
                 </div>
                 <div class="list-film">
                     <h1 class="title">PHIM BỘ</h1>
-                    <div class="swiper-container">
-                            <!-- Additional required wrapper -->
-                    <div class="swiper-wrapper">
-                        <!-- Slides -->
-                        <div class="swiper-slide">
-                            <div class="row">
-                                @foreach ($filmBo as $item)
-                                <div class="col-md-3 col-sm-3 col-xs-6">
-                                    <div class="list-item" title="{{$item->name}}">
-                                        @if ($item->type === 2)
-                                        <div class="episode">{{sizeof($item->filmDetail)}}/{{$item->episode}}</div>
-                                        @endif
-                                        <div class="thumb" style="background-image: url({{$item->poster}});"></div>
-                                        <div class="play"></div>
-                                        <div class="black-gradient"></div>
-                                        <div class="film-name">
-                                            <a href="{{route('film', ['uri' => Help::beauty($item->name), 'id' => $item->id])}}" title="{{$item->name}}">{{$item->name}}</a>
-                                        </div>
-                                    </div>
+                    <div class="row">
+                        @foreach ($filmBo as $item)
+                        <div class="col-md-3 col-sm-3 col-xs-6">
+                            <div class="list-item" title="{{$item->name}}">
+                                @if ($item->type === 2)
+                                <div class="episode">{{sizeof($item->filmDetail)}}/{{$item->episode}}</div>
+                                @endif
+                                <div class="thumb" style="background-image: url({{$item->poster}});"></div>
+                                <div class="play"></div>
+                                <div class="black-gradient"></div>
+                                <div class="film-name">
+                                    <a href="{{route('film', ['uri' => Help::beauty($item->name), 'id' => $item->id])}}" title="{{$item->name}}">{{$item->name}}</a>
                                 </div>
-                                @endforeach
                             </div>
                         </div>
-                    </div>
-                    <!-- If we need pagination -->
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="list-film">
                     <h1 class="title">PHIM LẺ</h1>
-                    <div class="swiper-container">
-                            <!-- Additional required wrapper -->
-                    <div class="swiper-wrapper">
-                        <!-- Slides -->
-                        <div class="swiper-slide">
-                            <div class="row">
-                                @foreach ($filmLe as $item)
-                                <div class="col-md-3 col-sm-3 col-xs-6">
-                                    <div class="list-item" title="{{$item->name}}">
-                                        @if ($item->type === 2)
-                                        <div class="episode">{{sizeof($item->filmDetail)}}/{{$item->episode}}</div>
-                                        @endif
-                                        <div class="thumb" style="background-image: url({{$item->poster}});"></div>
-                                        <div class="play"></div>
-                                        <div class="black-gradient"></div>
-                                        <div class="film-name">
-                                            <a href="{{route('film', ['uri' => Help::beauty($item->name), 'id' => $item->id])}}" title="{{$item->name}}">{{$item->name}}</a>
-                                        </div>
-                                    </div>
+                    <div class="row">
+                        @foreach ($filmLe as $item)
+                        <div class="col-md-3 col-sm-3 col-xs-6">
+                            <div class="list-item" title="{{$item->name}}">
+                                @if ($item->type === 2)
+                                <div class="episode">{{sizeof($item->filmDetail)}}/{{$item->episode}}</div>
+                                @endif
+                                <div class="thumb" style="background-image: url({{$item->poster}});"></div>
+                                <div class="play"></div>
+                                <div class="black-gradient"></div>
+                                <div class="film-name">
+                                    <a href="{{route('film', ['uri' => Help::beauty($item->name), 'id' => $item->id])}}" title="{{$item->name}}">{{$item->name}}</a>
                                 </div>
-                                @endforeach
                             </div>
                         </div>
-                    </div>
-                    <!-- If we need pagination -->
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="list-film">
                     <h1 class="title">TOP PHIM MỚI</h1>
-                    <div class="swiper-container">
-                            <!-- Additional required wrapper -->
-                    <div class="swiper-wrapper">
-                        <!-- Slides -->
-                        <div class="swiper-slide">
-                            <div class="row">
-                                @foreach ($filmNew as $item)
-                                <div class="col-md-3 col-sm-3 col-xs-6">
-                                    <div class="list-item" title="{{$item->name}}">
-                                        @if ($item->type === 2)
-                                        <div class="episode">{{sizeof($item->filmDetail)}}/{{$item->episode}}</div>
-                                        @endif
-                                        <div class="thumb" style="background-image: url({{$item->poster}});"></div>
-                                        <div class="play"></div>
-                                        <div class="black-gradient"></div>
-                                        <div class="film-name">
-                                            <a href="{{route('film', ['uri' => Help::beauty($item->name), 'id' => $item->id])}}" title="{{$item->name}}">{{$item->name}}</a>
-                                        </div>
-                                    </div>
+                    <div class="row">
+                        @foreach ($filmNew as $item)
+                        <div class="col-md-3 col-sm-3 col-xs-6">
+                            <div class="list-item" title="{{$item->name}}">
+                                @if ($item->type === 2)
+                                <div class="episode">{{sizeof($item->filmDetail)}}/{{$item->episode}}</div>
+                                @endif
+                                <div class="thumb" style="background-image: url({{$item->poster}});"></div>
+                                <div class="play"></div>
+                                <div class="black-gradient"></div>
+                                <div class="film-name">
+                                    <a href="{{route('film', ['uri' => Help::beauty($item->name), 'id' => $item->id])}}" title="{{$item->name}}">{{$item->name}}</a>
                                 </div>
-                                @endforeach
                             </div>
                         </div>
-                    </div>
-                    <!-- If we need pagination -->
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
+                        @endforeach
                     </div>
                 </div>
-                <div class="list-film">
+                <div class="list-film top-film">
                     <h1 class="title">TOP PHIM XEM NHIỀU</h1>
                     <div class="swiper-container">
-                            <!-- Additional required wrapper -->
-                    <div class="swiper-wrapper">
-                        <!-- Slides -->
-                        <div class="swiper-slide">
-                            <div class="row">
-                                @foreach ($filmMostView as $item)
-                                <div class="col-md-3 col-sm-3 col-xs-6">
-                                    <div class="list-item" title="{{$item->name}}">
-                                        @if ($item->type === 2)
-                                        <div class="episode">{{sizeof($item->filmDetail)}}/{{$item->episode}}</div>
-                                        @endif
-                                        <div class="thumb" style="background-image: url({{$item->poster}});"></div>
-                                        <div class="play"></div>
-                                        <div class="black-gradient"></div>
-                                        <div class="film-name">
-                                            <a href="{{route('film', ['uri' => Help::beauty($item->name), 'id' => $item->id])}}" title="{{$item->name}}">{{$item->name}}</a>
-                                        </div>
+                        <div class="swiper-wrapper">
+                            @foreach ($filmMostView as $item)
+                            <div class="swiper-slide col-md-3 col-sm-3 col-xs-2">
+                                <div class="list-item" title="{{$item->name}}">
+                                    @if ($item->type === 2)
+                                    <div class="episode">{{sizeof($item->filmDetail)}}/{{$item->episode}}</div>
+                                    @endif
+                                    <div class="thumb" style="background-image: url({{$item->poster}});"></div>
+                                    <div class="play"></div>
+                                    <div class="black-gradient"></div>
+                                    <div class="film-name">
+                                        <a href="{{route('film', ['uri' => Help::beauty($item->name), 'id' => $item->id])}}" title="{{$item->name}}">{{$item->name}}</a>
                                     </div>
                                 </div>
-                                @endforeach
                             </div>
+                            @endforeach
                         </div>
-                    </div>
-                    <!-- If we need pagination -->
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
                     </div>
                 </div>
             </div>
@@ -160,7 +118,10 @@
             delay: 5000,
         },
         });
-        var swiperFilm = new Swiper('.list-film .swiper-container', {
+        var width = window.innerWidth;
+        var newFilm = new Swiper('.top-film .swiper-container', {
+            slidesPerView: width <= 480 ? 2 : width > 480 && width <= 768 ? 3 : 4,
+            slidesPerColumn: 2
         });
     </script>
 @endsection

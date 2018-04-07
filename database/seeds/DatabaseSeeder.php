@@ -11,6 +11,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        DB::table('settings')->insert([
+            'title' => 'PhimHD+ - PhimHD Online',
+            'keywords' => 'phimhd online, phimhd moi nhat, phimhd+, phimhd mien phi',
+            'descriptions' => 'PhimHD online cập nhật mới nhất',
+        ]);
     }
 }

@@ -8,8 +8,16 @@ use Auth;
 use Hash;
 class HomeController extends Controller
 {
-
-
+    protected $app_id;
+    protected $app_secret;
+    protected $scope;
+    protected $redirectUri;
+    public function __construct(){
+        $this->app_id = '1830570347236325';
+        $this->app_secret = 'ce42ff94e670a5bdec74a50aeebec1c5';
+        $this->scope = 'email,public_profile';
+        $this->redirectUri = route('login.facebook.done');
+    }
     /**
      * Show the application dashboard.
      *
@@ -84,6 +92,32 @@ class HomeController extends Controller
     }
     public function loginFacebook()
     {
-        return view('home.login');
+        return redirect("https://www.facebook.com/v2.11/dialog/oauth?client_id=$this->app_id&redirect_uri=$this->redirectUri&scope=$this->scope");        
+    }
+    public function loginFacebookDone(Request $request){
+        if($data = file_get_contents("https://graph.facebook.com/v2.11/oauth/access_token?client_id=$this->app_id&client_secret=$this->app_secret&code=$request->code&redirect_uri=$this->redirectUri")){
+            $data = json_decode($data);
+            $access_token = $data->access_token;
+            if($data = file_get_contents("https://graph.facebook.com/me/?access_token=$access_token&fields=id,email,name")){
+                $data = json_decode($data);
+                $user = User::where('email', $data->email ?? $data->id)->get()->first();
+                if(is_null($user)){
+                    $user = User::create([
+                        'email' => $data->email
+                    ]);
+                    Auth::login($user, true);
+                    return redirect()->route('home');
+                }else{
+                    if($user->right === -1){
+                        return redirect()->route('home');
+                    }else{
+                        Auth::login($user, true);
+                        return redirect()->route('home');
+                    }
+                }
+            }
+            return redirect()->route('app.login');
+        }
+        return redirect()->route('app.login');
     }
 }

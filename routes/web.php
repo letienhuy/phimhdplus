@@ -16,6 +16,7 @@ Route::match(['GET', 'POST'], '/register', 'HomeController@register')->name('reg
 Route::group(['prefix' => 'login', 'middleware' => 'guest'], function(){
     Route::match(['GET', 'POST'], '/', 'HomeController@login')->name('login');
     Route::get('/facebook', 'HomeController@loginFacebook')->name('login.facebook');
+    Route::get('/facebook/done', 'HomeController@loginFacebookDone')->name('login.facebook.done');
 });
 Route::get('/logout', function(){
     Auth::logout();

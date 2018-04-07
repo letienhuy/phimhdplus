@@ -7,10 +7,10 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': csrfToken
     }
 });
-$(document).ready(function(){
+$(document).ready(function() {
     $('.film-name').tooltip();
-    $('.btn-toggle').click(function(){
-        if($(this).hasClass('on')){
+    $('.btn-toggle').click(function() {
+        if ($(this).hasClass('on')) {
             $(this).removeClass('on');
             $('.slide').removeClass('slide-toggle');
             $('.over').remove();
@@ -20,20 +20,22 @@ $(document).ready(function(){
             $('<div/>').addClass('over').appendTo('#content');
         }
     });
-    $('.search-box_button').click(function(){
-        if($(this).children().hasClass('fa-search')){
+    $('.search-box_button').click(function() {
+        if ($(this).children().hasClass('fa-search')) {
             $(this).children().removeClass('fa-search').addClass('fa-close');
             $('.search-box_input').addClass('search-box_input_show');
+            $('.search-box_button_open').toggle('slide');
         } else {
             $(this).children().removeClass('fa-close').addClass('fa-search');
             $('.search-box_input').removeClass('search-box_input_show');
+            $('.search-box_button_open').toggle('slide');
         }
     });
-    $('.icon-user').click(function(){
+    $('.icon-user').click(function() {
         $('.slide-collapse').toggle("scale");
     });
 });
-$(document).on('submit', '#login-form', function(event){
+$(document).on('submit', '#login-form', function(event) {
     event.preventDefault();
     error.remove();
     var email = $('input[name=email]');
@@ -46,21 +48,21 @@ $(document).on('submit', '#login-form', function(event){
         data: $(this).serialize(),
         processData: false,
         type: 'POST',
-        success: function(res){
+        success: function(res) {
             btn.attr('class', 'button');
             $("#login-form").remove();
             success.text(res.message).appendTo('#result');
-            setTimeout(function(){
+            setTimeout(function() {
                 location.href = res.redirectUrl;
             }, 2000);
         },
-        error: function(err){
+        error: function(err) {
             btn.attr('class', 'button');
             error.text(err.responseJSON.message).appendTo('#result');
         }
     });
 });
-$(document).on('submit', '#register-form', function(event){
+$(document).on('submit', '#register-form', function(event) {
     event.preventDefault();
     error.remove();
     var email = $('input[name=email]');
@@ -69,12 +71,12 @@ $(document).on('submit', '#register-form', function(event){
     var btn = $(this).children('.button');
     var data = new FormData(this);
     btn.attr('class', 'btn-loading');
-    if(email.val() === ""){
+    if (email.val() === "") {
         btn.attr('class', 'button');
         inputFailed.appendTo(email.parent());
         error.text("Vui lòng nhập email!").appendTo('#result');
         return false;
-    } else if(password.val() === ""){
+    } else if (password.val() === "") {
         btn.attr('class', 'button');
         error.text("Vui lòng nhập mật khẩu!").appendTo('#result');
         return false;
@@ -84,52 +86,52 @@ $(document).on('submit', '#register-form', function(event){
         data: $(this).serialize(),
         processData: false,
         type: 'POST',
-        success: function(res){
+        success: function(res) {
             btn.attr('class', 'btn');
             $("#register-form").remove();
             success.text(res.message).appendTo('#result');
-            setTimeout(function(){
+            setTimeout(function() {
                 location.href = res.redirectUrl;
             }, 2000);
         },
-        error: function(err){
+        error: function(err) {
             btn.attr('class', 'btn');
             error.text(err.responseJSON.message).appendTo('#result');
         }
     });
 });
-$(document).on('click', '.film-eposide span', function(){
+$(document).on('click', '.film-eposide span', function() {
     var id = $(this).data('eposide');
     var active = $('.film-eposide span.active');
-    if($(this).hasClass('active')){
+    if ($(this).hasClass('active')) {
         return false;
     }
     active.removeClass('active');
     $(this).addClass('active');
     $.ajax({
-        url: homeUrl + '/ajax/source/'+id,
+        url: homeUrl + '/ajax/source/' + id,
         processData: false,
-        success: function(res){
+        success: function(res) {
             play(res.source, res.poster, res.name);
         }
     });
 });
-$(document).on('click', '.over, .closex', function(){
+$(document).on('click', '.over, .closex', function() {
     $('.login-dialog').remove();
     $('.over').remove();
 });
-$(document).on('click', '.report', function(){
+$(document).on('click', '.report', function() {
     var id = $(this).data('film');
     $.ajax({
-        url: homeUrl + '/ajax/report/'+id,
+        url: homeUrl + '/ajax/report/' + id,
         processData: false,
-        success: function(res){
+        success: function(res) {
             $('<div/>').addClass('over').appendTo('body');
             $('body').append(res);
         }
     });
 });
-$(document).on('submit', '#report-form', function(event){
+$(document).on('submit', '#report-form', function(event) {
     event.preventDefault();
     error.remove();
     var email = $('input[name=email]');
@@ -139,82 +141,83 @@ $(document).on('submit', '#report-form', function(event){
     var data = new FormData(this);
     btn.attr('class', 'btn-loading');
     $.ajax({
-        url: homeUrl + '/ajax/report/'+id,
+        url: homeUrl + '/ajax/report/' + id,
         data: $(this).serialize(),
         processData: false,
         type: 'POST',
-        success: function(res){
+        success: function(res) {
             btn.attr('class', 'button');
             $("#report-form").remove();
             success.text(res.message).appendTo('#result');
         },
-        error: function(err){
+        error: function(err) {
             btn.attr('class', 'button');
             error.text(err.responseJSON.message).appendTo('#result');
         }
     });
 });
-$(document).on('click', '#like-button', function(event){
+$(document).on('click', '#like-button', function(event) {
     var id = $(this).data('id');
     var _this = this;
     $.ajax({
-        url: homeUrl + '/ajax/like/'+id,
+        url: homeUrl + '/ajax/like/' + id,
         processData: false,
-        success: function(res){
-            if(res.code){
+        success: function(res) {
+            if (res.code) {
                 $(_this).css({
                     color: '#f00'
                 });
                 $(_this).children('span').text('Đã thích');
             } else {
                 $(_this).css('color', '');
-                $(_this).children('span').text('Yêu thích');                
+                $(_this).children('span').text('Yêu thích');
             }
         }
     });
 });
 var selected = false;
-$(document).on('click', '.star-white', function(e){
-    if(selected){
+$(document).on('click', '.star-white', function(e) {
+    if (selected) {
         return false;
     }
     var index = $(this).index();
     var id = $(this).parent().data('id');
-    $('.list-star').children().removeClass('star');    
-    for(var i = 0; i <= index; i++){
-        $('.list-star .star-white:eq('+i+')').addClass('star');
+    $('.list-star').children().removeClass('star');
+    for (var i = 0; i <= index; i++) {
+        $('.list-star .star-white:eq(' + i + ')').addClass('star');
     }
     $.ajax({
-        url: homeUrl + '/ajax/vote/'+id,
+        url: homeUrl + '/ajax/vote/' + id,
         type: "POST",
-        data: {'point': ++index},
+        data: { 'point': ++index },
         async: false,
-        success: function(res){
-            if(res.code){
+        success: function(res) {
+            if (res.code) {
                 selected = true;
             }
         },
-        error: function(err){
+        error: function(err) {
             console.log(err);
         }
     });
 });
-$(document).on('mouseover', '.star-white', function(e){
-    if(selected){
+$(document).on('mouseover', '.star-white', function(e) {
+    if (selected) {
         return false;
     }
     var index = $(this).index();
-    for(var i = 0; i <= index; i++){
-        $('.list-star .star-white:eq('+i+')').addClass('star');
+    for (var i = 0; i <= index; i++) {
+        $('.list-star .star-white:eq(' + i + ')').addClass('star');
     }
 });
-$(document).on('mouseleave', '.star-white', function(e){
-    if(selected){
+$(document).on('mouseleave', '.star-white', function(e) {
+    if (selected) {
         return false;
     }
     $('.list-star').children().removeClass('star');
 });
-function play(source, poster, title){
+
+function play(source, poster, title) {
     $('#player').children().remove();
     jwplayer('player').setup({
         sources: [{

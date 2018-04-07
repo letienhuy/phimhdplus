@@ -36,15 +36,14 @@
 }(document, 'script', 'facebook-jssdk'));</script>
     <header>
     <div class="header-logo">
-        <a href="{{route('home')}}">
-            <img src="" alt="LOGO"/>
-        </a>
+        <img src="http://huyit.me/images/images/nameShop.png" alt="LOGO"/>
     </div>
     <div class="search-box">
         <button class="search-box_button">
             <i class="fa fa-search"></i>
         </button>
         <input type="text" placeholder="Tìm kiếm phim, diễn viên..." class="search-box_input"/>
+        <button class="search-box_button_open"><i class="fa fa-search"></i></button>
     </div>
     <button class="btn-toggle">
         <span class="icon-bar"></span>

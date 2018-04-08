@@ -16,6 +16,6 @@
         <button class="button">Đăng ký tài khoản</button>
     </a>
     <span class="login-choose">hoặc</span>
-    <a href="{{route('login.facebook')}}"><button class="button btn-facebook">Đăng nhập bằng Facebook</button></a>
+    <a href="{{route('login.facebook')}}"><button class="button btn-facebook"><i class="fa fa-facebook"></i> Đăng nhập bằng Facebook</button></a>
 </div>
 @endsection

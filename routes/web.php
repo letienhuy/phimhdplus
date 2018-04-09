@@ -27,6 +27,7 @@ Route::get('/phim/{id}-{uri}', 'DetailController@detail')->name('film');
 Route::get('/phim/{id}-{uri}/view', 'DetailController@viewFilm')->name('film.view');
 Route::get('/phim/{id}-{uri}/download', 'DetailController@download')->name('film.download')->middleware('auth');
 Route::get('/tags/{keys}', 'SearchController@tag')->name('tag');
+Route::get('/search/{keys}', 'SearchController@index')->name('search');
 Route::group(['prefix' => 'ajax'], function(){
     Route::get('/source/{id}', 'DetailController@getSource');
     Route::any('/report/{id}', 'DetailController@report');
@@ -35,6 +36,8 @@ Route::group(['prefix' => 'ajax'], function(){
 });
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
     Route::get('/', 'AdminController@index')->name('admin');
+    Route::any('/film/{action?}', 'AdminController@film')->name('admin.film');
+    Route::any('/film/source/{id}/{action?}', 'AdminController@filmSource')->name('admin.film.source');
 });
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
     Route::get('/', 'UserController@index')->name('user');

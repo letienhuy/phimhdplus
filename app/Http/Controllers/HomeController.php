@@ -73,6 +73,9 @@ class HomeController extends Controller
     public function login(Request $request)
     {
         if($request->method() === "POST"){
+            if(is_null($request->email)){
+                return response()->json(['message' => 'Vui lòng nhập địa chỉ email!'], 422);
+            }
             $user = User::where('email', $request->email)->first();
             if(is_null($user)){
                 return response()->json(['message' => 'Email này không tồn tại!'], 422);

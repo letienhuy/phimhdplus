@@ -4,8 +4,12 @@
     <div class="visible-xs">
         @if (Auth::check())
             <span style="color:red">Credit: {{Auth::user()->credit}}</span><br>
-            <span><a href="{{route('user.info')}}">Thông tin cá nhân</a></span> |
-            <span><a href="{{route('logout')}}">Đăng xuất</a></span>
+            @if (Auth::user()->right === 1)
+            <span><a style="color:red; font-weight:bold;" href="{{route('admin')}}">Admin Control Panel</a></span>            
+            @else
+                <span><a href="{{route('user.info')}}">Thông tin cá nhân</a></span>
+            @endif
+             | <span><a href="{{route('logout')}}">Đăng xuất</a></span>
         @else
             <a href="{{route('login', ['redirectUrl' => url()->current()])}}">
                 <button class="button">Đăng nhập</button>

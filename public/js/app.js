@@ -45,7 +45,9 @@ $(document).on('submit', '#login-form', function(event) {
     btn.attr('class', 'btn-loading');
     $.ajax({
         url: homeUrl + '/login',
-        data: $(this).serialize(),
+        data: data,
+        contentType: false,
+        cache: false,
         processData: false,
         type: 'POST',
         success: function(res) {
@@ -83,7 +85,9 @@ $(document).on('submit', '#register-form', function(event) {
     }
     $.ajax({
         url: homeUrl + '/register',
-        data: $(this).serialize(),
+        data: data,
+        contentType: false,
+        cache: false,
         processData: false,
         type: 'POST',
         success: function(res) {
@@ -142,7 +146,9 @@ $(document).on('submit', '#report-form', function(event) {
     btn.attr('class', 'btn-loading');
     $.ajax({
         url: homeUrl + '/ajax/report/' + id,
-        data: $(this).serialize(),
+        data: data,
+        contentType: false,
+        cache: false,
         processData: false,
         type: 'POST',
         success: function(res) {
@@ -195,9 +201,6 @@ $(document).on('click', '.star-white', function(e) {
             if (res.code) {
                 selected = true;
             }
-        },
-        error: function(err) {
-            console.log(err);
         }
     });
 });
@@ -216,7 +219,142 @@ $(document).on('mouseleave', '.star-white', function(e) {
     }
     $('.list-star').children().removeClass('star');
 });
+$(document).on('change', 'input[name=category_parent]', function(e) {
+    var id = this.value;
+    $.ajax({
+        url: homeUrl + '/admin/film/category',
+        data: { 'id': id },
+        success: function(res) {
+            var html = '';
+            $.each(res, function(key, val) {
+                html += '<li><input type="checkbox" name="category[]" value="' + val.id + '">' + val.name + '</li>';
+            });
+            $('#dropSelect').html(html);
+        }
+    });
+});
+$(document).on('click', '#category_parent li', function(e) {
+    var id = $(this).children('input')[0].value;
+    $.ajax({
+        url: homeUrl + '/admin/film/category',
+        data: { 'id': id },
+        success: function(res) {
+            var html = '';
+            $.each(res, function(key, val) {
+                html += '<li><input type="checkbox" name="category[]" value="' + val.id + '">' + val.name + '</li>';
+            });
+            $('#dropSelect').html(html);
+        }
+    });
+});
+$(document).on('click', '.dropSelect li', function(e) {
+    $(this).children('input')[0].checked = true;
+});
 
+$(document).on('submit', '#add-film-form', function(event) {
+    event.preventDefault();
+    error.remove();
+    var btn = $(this).children().find('.button');
+    var data = new FormData(this);
+    btn.attr('class', 'btn-loading');
+    $.ajax({
+        url: homeUrl + '/admin/film/add',
+        data: data,
+        contentType: false,
+        cache: false,
+        processData: false,
+        type: 'POST',
+        success: function(res) {
+            btn.attr('class', 'button');
+            success.text(res.message).appendTo('#result');
+            $('#add-film-form')[0].reset();
+        },
+        error: function(err) {
+            btn.attr('class', 'button');
+            error.text(err.responseJSON.message).appendTo('#result');
+        }
+    });
+});
+$(document).on('submit', '#edit-film-form', function(event) {
+    event.preventDefault();
+    error.remove();
+    var btn = $(this).children().find('.button');
+    var data = new FormData(this);
+    btn.attr('class', 'btn-loading');
+    $.ajax({
+        url: homeUrl + '/admin/film/edit',
+        data: data,
+        contentType: false,
+        cache: false,
+        processData: false,
+        type: 'POST',
+        success: function(res) {
+            btn.attr('class', 'button');
+            success.text(res.message).appendTo('#result');
+            $('#add-film-form')[0].reset();
+        },
+        error: function(err) {
+            btn.attr('class', 'button');
+            error.text(err.responseJSON.message).appendTo('#result');
+        }
+    });
+});
+$(document).on('click', '#delete-film', function(e) {
+    var id = $(this).data('id');
+    $.ajax({
+        url: homeUrl + '/admin/film/delete',
+        data: { 'id': id },
+        success: function(res) {
+            $('<div/>').addClass('over').appendTo('body');
+            $('body').append(res);
+        }
+    });
+});
+$(document).on('click', '#confirm-delete', function(e) {
+    var id = $(this).data('id');
+    $.ajax({
+        url: homeUrl + '/admin/film/delete',
+        type: "POST",
+        data: { 'id': id },
+        success: function(res) {
+            $('.login-dialog').remove();
+            $('.over').remove();
+            $('<div/>').addClass('over').appendTo('body');
+            $('body').append(res);
+        }
+    });
+});
+submitSourceForm('#add-source-form', 'add');
+submitSourceForm('#edit-source-form', 'edit');
+
+function submitSourceForm(element, action) {
+    $(document).on('submit', element, function(event) {
+        var id = $(this).data('id');
+        event.preventDefault();
+        error.remove();
+        var btn = $(this).children().find('.button');
+        var data = new FormData(this);
+        btn.attr('class', 'btn-loading');
+        $.ajax({
+            url: homeUrl + '/admin/film/source/' + id + '/' + action,
+            data: data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            type: 'POST',
+            success: function(res) {
+                btn.attr('class', 'button');
+                success.text(res.message).appendTo('#result');
+                $(element)[0].reset();
+            },
+            error: function(err) {
+                btn.attr('class', 'button');
+                error.text(err.responseJSON.message).appendTo('#result');
+            }
+        });
+    });
+}
+//play function
 function play(source, poster, title) {
     $('#player').children().remove();
     jwplayer('player').setup({

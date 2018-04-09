@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-9 col-sm-8">
                 <div class="slide-home">
                     <div class="swiper-container">
                     <!-- Additional required wrapper -->
@@ -26,6 +26,11 @@
                         @foreach ($filmBo as $item)
                         <div class="col-md-3 col-sm-3 col-xs-6">
                             <div class="list-item" title="{{$item->name}}">
+                                @if (count($item->vote) === 0)
+                                    <div class="star-rank-5"></div>
+                                @else
+                                    <div class="star-rank-{{round($item->vote->sum('point')/count($item->vote))}}"></div>
+                                @endif
                                 @if ($item->type === 2)
                                 <div class="episode">{{sizeof($item->filmDetail)}}/{{$item->episode}}</div>
                                 @endif
@@ -46,6 +51,11 @@
                         @foreach ($filmLe as $item)
                         <div class="col-md-3 col-sm-3 col-xs-6">
                             <div class="list-item" title="{{$item->name}}">
+                                @if (count($item->vote) === 0)
+                                    <div class="star-rank-5"></div>
+                                @else
+                                    <div class="star-rank-{{round($item->vote->sum('point')/count($item->vote))}}"></div>
+                                @endif
                                 @if ($item->type === 2)
                                 <div class="episode">{{sizeof($item->filmDetail)}}/{{$item->episode}}</div>
                                 @endif
@@ -66,6 +76,11 @@
                         @foreach ($filmNew as $item)
                         <div class="col-md-3 col-sm-3 col-xs-6">
                             <div class="list-item" title="{{$item->name}}">
+                                @if (count($item->vote) === 0)
+                                    <div class="star-rank-5"></div>
+                                @else
+                                    <div class="star-rank-{{round($item->vote->sum('point')/count($item->vote))}}"></div>
+                                @endif
                                 @if ($item->type === 2)
                                 <div class="episode">{{sizeof($item->filmDetail)}}/{{$item->episode}}</div>
                                 @endif
@@ -87,6 +102,11 @@
                             @foreach ($filmMostView as $item)
                             <div class="swiper-slide col-md-3 col-sm-3 col-xs-2">
                                 <div class="list-item" title="{{$item->name}}">
+                                    @if (count($item->vote) === 0)
+                                        <div class="star-rank-5"></div>
+                                    @else
+                                        <div class="star-rank-{{round($item->vote->sum('point')/count($item->vote))}}"></div>
+                                    @endif
                                     @if ($item->type === 2)
                                     <div class="episode">{{sizeof($item->filmDetail)}}/{{$item->episode}}</div>
                                     @endif
@@ -103,8 +123,16 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 hidden-xs">
-                ADS
+            <div class="col-md-3 col-sm-4 hidden-xs">
+                <div class="ads">
+                    <img src="http://huyit.me/images/images/1462520762-phai-2-mon-ngon.jpg" alt="">
+                </div>
+                <div class="list-film">
+                    <h1 class="title">TOP PHIM - PHIMHD+</h1>
+                    <div class="list-item-bar">
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>

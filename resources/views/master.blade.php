@@ -36,7 +36,9 @@
 }(document, 'script', 'facebook-jssdk'));</script>
     <header>
     <div class="header-logo">
+    <a href="{{route('home')}}" title="Home">
         <img src="http://huyit.me/images/images/nameShop.png" alt="LOGO"/>
+    </a>
     </div>
     <div class="search-box">
         <button class="search-box_button">

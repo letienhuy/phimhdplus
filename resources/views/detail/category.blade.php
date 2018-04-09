@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="list-film">
-                <h1 class="title">{{$category->parent->name}} > {{$category->name}}</h1>
+                <h1 class="title">THỂ LOẠI: {{$category->name}}</h1>
                 <div class="swiper-container">
                         <!-- Additional required wrapper -->
                 <div class="swiper-wrapper">

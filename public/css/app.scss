@@ -151,6 +151,19 @@ $title_color: rgb(255, 94, 0);
         height: 50px;
         width: 100%;
     }
+    .ads {
+        width: 100%;
+        height: 0;
+        padding-top: 100%;
+        position: relative;
+        img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+    }
     .slide {
         width: 240px;
         height: 100%;
@@ -459,6 +472,33 @@ $title_color: rgb(255, 94, 0);
                 text-overflow: ellipsis;
                 overflow: hidden;
             }
+            .star-rank-1,
+            .star-rank-2,
+            .star-rank-3,
+            .star-rank-4,
+            .star-rank-5,
+            {
+                position: absolute;
+                top: 5px;
+                left: 5px;
+                width: 90px;
+                height: 15px;
+                z-index: 99;
+                background: url('./icons/star-rank.png') no-repeat;
+                background-position: 0 -2px;
+            }
+            .star-rank-4 {
+                background-position: 0 -42px;
+            }
+            .star-rank-3 {
+                background-position: 0 -82px;
+            }
+            .star-rank-2 {
+                background-position: 0 -122px;
+            }
+            .star-rank-1 {
+                background-position: 0 -162px;
+            }
             .film-name {
                 width: 100%;
                 height: 30px;
@@ -557,6 +597,7 @@ $title_color: rgb(255, 94, 0);
         transform: translate(-50%, -50%);
         background: $fourth_color;
         padding: 15px;
+        padding-top: 25px;
         z-index: 9999;
         span.closex {
             width: 20px;
@@ -729,6 +770,163 @@ $title_color: rgb(255, 94, 0);
         padding: 5px;
         margin-bottom: 5px;
     }
+    .admin-table-bar {
+        width: 100%;
+        overflow-x: auto;
+    }
+    .admin-table {
+        width: 100%;
+        border: 1px solid #ddd;
+        th,
+        td {
+            text-align: center;
+            padding: 5px;
+            line-height: 30px;
+            border: 1px solid #ddd;
+        }
+    }
+    .admin-slide {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 10px;
+        li {
+            list-style: none;
+            line-height: 30px;
+            padding: 5px;
+            &:hover {
+                background: #111;
+            }
+            a {
+                color: #ffffff;
+                text-decoration: none;
+            }
+        }
+    }
+    .admin-form {
+        select {
+            width: 100%;
+            height: 30px;
+            display: block;
+            border: 0;
+            background: #222222;
+        }
+        label {
+            display: block;
+        }
+        input[type=text] {
+            width: 100%;
+            height: 30px;
+            padding: 5px;
+            line-height: 20px;
+            background: #222222;
+            border: 0;
+        }
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            border: 0;
+            background: #222222;
+            padding: 5px;
+        }
+        .old-poster {
+            width: 100%;
+            height: 0;
+            padding-top: 50%;
+            position: relative;
+            img {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+        }
+    }
+    .multiSelect {
+        width: 100%;
+        height: 40px;
+        background: #222;
+        color: #ffffff;
+        position: relative;
+        span {
+            display: block;
+            width: 100%;
+            height: 100%;
+            line-height: 30px;
+            padding: 5px;
+            cursor: pointer;
+        }
+        .dropSelect {
+            display: none;
+            width: 100%;
+            margin: 0;
+            padding: 5px;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            background: #333;
+            z-index: 99;
+            li {
+                list-style: none;
+                line-height: 30px;
+                cursor: pointer;
+                input {
+                    margin: 4px;
+                }
+            }
+        }
+        &:hover {
+            .dropSelect {
+                display: block !important;
+            }
+        }
+    }
+    .pagination {
+        width: 100%;
+        margin: 10px 0;
+        padding: 5px;
+        text-align: center;
+        li {
+            display: inline-block;
+            a {
+                background: #222;
+                border-radius: 5px;
+                border: 0;
+                color: #fff;
+                line-height: 20px;
+            }
+        }
+        li:last-child {
+            a {
+                border-radius: 5px;
+            }
+        }
+        .active {
+            span {
+                border-radius: 5px;
+                border: 0;
+                color: #fff;
+                line-height: 20px;
+                background: #4cae4c;
+                &:hover {
+                    border-radius: 5px;
+                }
+            }
+        }
+        .disabled {
+            span {
+                background: none;
+                border-radius: 5px;
+                border: 0;
+                color: #fff;
+                line-height: 20px;
+                &:hover {
+                    border-radius: 5px;
+                }
+            }
+        }
+    }
 }
 
 @media screen and (min-width: 480px) and (max-width: 768px) {
@@ -746,6 +944,7 @@ $title_color: rgb(255, 94, 0);
     header {
         .header-logo {
             position: absolute;
+            z-index: 99;
             left: 46px;
         }
         height: 80px;
@@ -764,7 +963,6 @@ $title_color: rgb(255, 94, 0);
         padding-bottom: 10px;
     }
     .slide-home {
-        height: 400px;
         .swiper-slide {
             .thumb {
                 background-size: cover;
@@ -827,7 +1025,7 @@ $title_color: rgb(255, 94, 0);
             }
         }
         &-list {
-            width: calc(100% - 250px);
+            width: 100%;
             height: 100%;
             padding: 0;
             margin: 0;

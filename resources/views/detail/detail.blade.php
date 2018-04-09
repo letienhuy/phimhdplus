@@ -48,7 +48,7 @@
                         <i class="fa fa-star" style="color: #ED8A19"></i> ({{count($film->vote)}} votes)</span>           
                     <span>Lượt xem: {{$film->view}}</span>
                     <span>Đạo  diễn: {{$film->director}}</span>
-                    <span>Diễn viên: {{$film->actor}}</span>
+                    <span>Diễn viên: {!! Help::actorTags($film) !!}</span>
                     @if ($film->type === 2)
                         <span>Số tập: {{sizeof($film->filmDetail)}}/{{$film->episode}}</span>
                     @endif

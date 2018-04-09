@@ -80,5 +80,17 @@ class Helper{
         }
         return trim($html, ', ');
     }
+    public static function actorTags($film){
+        $html = "";
+        if($film->actor === ""){ 
+            return $html;
+        } else {
+            $keys = explode(',', $film->actor);
+            foreach($keys as $key){
+                $html .= '<a href="'.route('search', ['key' => trim($key, " ")]).'">'.$key.'</a>, ';            
+            }
+        }
+        return trim($html, ', ');
+    }
 }
 ?>

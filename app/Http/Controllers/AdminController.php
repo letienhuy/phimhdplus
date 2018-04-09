@@ -39,7 +39,7 @@ class AdminController extends Controller
                         if($request->poster->move(public_path('upload/posters'), $posterName)){
                             $film->poster = url('upload/posters/'.$posterName);
                             $film->save();
-                            return response()->json(['message' => 'Thêm phim <b>'.$film->name.'</b> thành công. Click <a href="'.route('admin.film', ['action' => 'source', 'id' => $film->id]).'">vào đây</a> để quản lý resource phim']);                            
+                            return response()->json(['message' => 'Thêm phim <b>'.$film->name.'</b> thành công. Click <a href="'.route('admin.film.source', ['id' => $film->id]).'">vào đây</a> để quản lý resource phim']);                            
                         } else {
                         return response()->json(['message' => 'Có lỗi xảy ra, vui lòng thử lại sau giây lát'], 422);                            
                         }
@@ -75,7 +75,7 @@ class AdminController extends Controller
                             }
                         }
                         if($film->save()){
-                            return response()->json(['message' => 'Sửa phim <b>'.$film->name.'</b> thành công. Click <a href="'.route('admin.film', ['action' => 'source', 'id' => $film->id]).'">vào đây</a> để quản lý resource phim']);                            
+                            return response()->json(['message' => 'Sửa phim <b>'.$film->name.'</b> thành công. Click <a href="'.route('admin.film.source', ['id' => $film->id]).'">vào đây</a> để quản lý resource phim']);                            
                         } else {
                             return response()->json(['message' => 'Có lỗi xảy ra, vui lòng thử lại sau giây lát'], 422);                            
                         }
@@ -178,6 +178,31 @@ class AdminController extends Controller
                 } else {
                     return view('admin.film.source.edit', ['filmDetail' => $filmDetail]);
                 }   
+            break;
+            case 'delete':
+                $filmDetail = FilmDetail::findOrFail($id);
+                if($request->method() === "POST"){
+                    if($filmDetail->delete()){
+                        $html = "<center><div class='alert alert-success'>
+                        Đã xoá resource <b>$filmDetail->name</b> thành công
+                        </div>
+                        </center>";
+                        return view('dialog', ['html' => $html]);
+                    } else {
+                        $html = "<center><div class='alert alert-danger'>
+                        Lỗi khi xoá phim <b>$filmDetail->name</b>, vui lòng thử lại
+                        </div>
+                        </center>";
+                        return view('dialog', ['html' => $html]);
+                    }
+                } else {
+                    $html = "<center><div class='alert alert-warning'>
+                    Xác nhận xoá resource <b>$filmDetail->name</b>
+                    </div>
+                    <button class='btn btn-warning' id='confirm-delete-resource' data-id='$filmDetail->id'>Xác nhận</button>
+                    </center>";
+                    return view('dialog', ['html' => $html]);
+                }
             break;
            default:
                 $film = Film::findOrFail($request->id);

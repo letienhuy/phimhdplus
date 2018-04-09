@@ -23,7 +23,7 @@
                             <a href="{{route('admin.film', ['action' => 'edit', 'id' => $item->id])}}">
                                 <button class="btn btn-success">Sửa</button>
                             </a>
-                            <a href="{{route('admin.film', ['action' => 'delete', 'id' => $item->id])}}">
+                            <a id="delete-film"  data-id="{{$item->id}}">
                                 <button class="btn btn-danger">Xoá</button>
                             </a>
                     </td>

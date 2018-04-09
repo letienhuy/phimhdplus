@@ -35,8 +35,9 @@
                                 <a href="{{route('admin.film.source', ['action' => 'edit', 'id' => $item->id])}}">
                                     <button class="btn btn-success">Sửa</button>
                                 </a>
-                                <a href="{{route('admin.film.source', ['action' => 'delete', 'id' => $item->id])}}">
+                                <a id="delete-source"  data-id="{{$item->id}}">
                                     <button class="btn btn-danger">Xoá</button>
+                                </a>
                             </td>
                         </tr>
                         @endforeach

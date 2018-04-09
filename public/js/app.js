@@ -266,7 +266,8 @@ $(document).on('submit', '#add-film-form', function(event) {
         type: 'POST',
         success: function(res) {
             btn.attr('class', 'button');
-            success.text(res.message).appendTo('#result');
+            $('<div/>').addClass('over').appendTo('body');
+            $('body').append('<div class="login-dialog"><span class="closex"></span><div class="alert alert-success">' + res.message + '</div></div>');
             $('#add-film-form')[0].reset();
         },
         error: function(err) {
@@ -290,7 +291,8 @@ $(document).on('submit', '#edit-film-form', function(event) {
         type: 'POST',
         success: function(res) {
             btn.attr('class', 'button');
-            success.text(res.message).appendTo('#result');
+            $('<div/>').addClass('over').appendTo('body');
+            $('body').append('<div class="login-dialog"><span class="closex"></span><div class="alert alert-success">' + res.message + '</div></div>');
             $('#add-film-form')[0].reset();
         },
         error: function(err) {
@@ -310,12 +312,46 @@ $(document).on('click', '#delete-film', function(e) {
         }
     });
 });
+$(document).on('click', '#delete-film', function(e) {
+    var id = $(this).data('id');
+    $.ajax({
+        url: homeUrl + '/admin/film/delete',
+        data: { 'id': id },
+        success: function(res) {
+            $('<div/>').addClass('over').appendTo('body');
+            $('body').append(res);
+        }
+    });
+});
+$(document).on('click', '#delete-source', function(e) {
+    var id = $(this).data('id');
+    $.ajax({
+        url: homeUrl + '/admin/film/source/' + id + '/delete',
+        success: function(res) {
+            $('<div/>').addClass('over').appendTo('body');
+            $('body').append(res);
+        }
+    });
+});
 $(document).on('click', '#confirm-delete', function(e) {
     var id = $(this).data('id');
     $.ajax({
         url: homeUrl + '/admin/film/delete',
         type: "POST",
         data: { 'id': id },
+        success: function(res) {
+            $('.login-dialog').remove();
+            $('.over').remove();
+            $('<div/>').addClass('over').appendTo('body');
+            $('body').append(res);
+        }
+    });
+});
+$(document).on('click', '#confirm-delete-resource', function(e) {
+    var id = $(this).data('id');
+    $.ajax({
+        url: homeUrl + '/admin/film/source/' + id + '/delete',
+        type: "POST",
         success: function(res) {
             $('.login-dialog').remove();
             $('.over').remove();
@@ -344,7 +380,8 @@ function submitSourceForm(element, action) {
             type: 'POST',
             success: function(res) {
                 btn.attr('class', 'button');
-                success.text(res.message).appendTo('#result');
+                $('<div/>').addClass('over').appendTo('body');
+                $('body').append('<div class="login-dialog"><span class="closex"></span><div class="alert alert-success">' + res.message + '</div></div>');
                 $(element)[0].reset();
             },
             error: function(err) {

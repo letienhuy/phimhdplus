@@ -190,12 +190,12 @@ $(document).on('click', '#like-button', function(event) {
         processData: false,
         success: function(res) {
             if (res.code) {
-                $(_this).css({
+                $(_this).children('i').css({
                     color: '#f00'
                 });
                 $(_this).children('span').text('Đã thích');
             } else {
-                $(_this).css('color', '');
+                $(_this).children('i').css('color', '');
                 $(_this).children('span').text('Yêu thích');
             }
         }
@@ -220,7 +220,7 @@ $(document).on('click', '.star-white', function(e) {
         success: function(res) {
             if (res.code) {
                 selected = true;
-                $('.film-vote span:first-child').text("BẠN ĐÃ ĐÁNH GIÁ");
+                $('.film-vote span:eq(0)').text("BẠN ĐÃ ĐÁNH GIÁ");
                 $('.star-point').text(index);
             }
         }

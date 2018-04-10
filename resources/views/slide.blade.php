@@ -7,7 +7,7 @@
             @if (Auth::user()->right === 1)
             <span><a style="color:red; font-weight:bold;" href="{{route('admin')}}">Admin Control Panel</a></span>            
             @else
-                <span><a href="{{route('user.info')}}">Thông tin cá nhân</a></span>
+                <span><a href="{{route('user')}}">Quản lý tài khoản</a></span>
             @endif
              | <span><a href="{{route('logout')}}">Đăng xuất</a></span>
         @else
@@ -21,7 +21,7 @@
         @if (Auth::user()->right === 1)
         <span><a style="color:red; font-weight:bold;" href="{{route('admin')}}">Admin Control Panel</a></span>            
         @endif
-            <span><a href="{{route('user.info')}}">Thông tin cá nhân</a></span>
+            <span><a href="{{route('user')}}">Quản lý tài khoản</a></span>
             <span style="color:red">Credit: {{Auth::user()->credit}}</span>
             <span><a href="">Nạp Credit</a></span>
             <span><a href="">Yêu cầu phim</a></span>

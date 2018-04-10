@@ -22,6 +22,9 @@ Route::get('/logout', function(){
     Auth::logout();
     return redirect()->route('home');
 })->name('logout')->middleware('auth');
+Route::get('/phim-bo-moi-nhat', 'HomeController@phimBo')->name('phimbo');
+Route::get('/phim-le-moi-nhat', 'HomeController@phimLe')->name('phimle');
+Route::get('/phim-moi-nhat', 'HomeController@phimMoi')->name('phimmoi');
 Route::get('/the-loai/{id}-{uri}', 'DetailController@category')->name('category');
 Route::get('/phim/{id}-{uri}', 'DetailController@detail')->name('film');
 Route::get('/phim/{id}-{uri}/view', 'DetailController@viewFilm')->name('film.view');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Film;
+use App\Vote;
 use Auth;
 use Hash;
 class HomeController extends Controller
@@ -25,8 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $filmBo = Film::where([['type', 2], ['disable', 0]])->limit(24)->get(); 
-        $filmLe = Film::where([['type', 1], ['disable', 0]])->limit(24)->get(); 
+        $filmBo = Film::where([['type', 2], ['disable', 0]])->orderBy('id', 'DESC')->limit(24)->get(); 
+        $filmLe = Film::where([['type', 1], ['disable', 0]])->orderBy('id', 'DESC')->limit(24)->get(); 
         $filmNew = Film::where('disable', 0)->orderBy('id', 'DESC')->limit(24)->get(); 
         $filmMostView = Film::where('disable', 0)->orderBy('view', 'DESC')->limit(24)->get();
         return view('home.index', [
@@ -34,6 +35,24 @@ class HomeController extends Controller
             'filmLe' => $filmLe,
             'filmNew' => $filmNew,
             'filmMostView' => $filmMostView
+        ]);
+    }
+    public function phimBo(){
+        $filmBo = Film::where([['type', 2], ['disable', 0]])->orderBy('id', 'DESC')->paginate(24); 
+        return view('home.phimbo', [
+            'filmBo' => $filmBo
+        ]);
+    }
+    public function phimLe(){
+        $filmLe = Film::where([['type', 1], ['disable', 0]])->orderBy('id', 'DESC')->paginate(24); 
+        return view('home.phimle', [
+            'filmLe' => $filmLe
+        ]);
+    }
+    public function phimMoi(){
+        $filmMoi = Film::where('disable', 0)->orderBy('id', 'DESC')->paginate(24); 
+        return view('home.phimmoi', [
+            'filmMoi' => $filmMoi
         ]);
     }
     public function register(Request $request)

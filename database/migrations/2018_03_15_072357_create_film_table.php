@@ -26,6 +26,7 @@ class CreateFilmTable extends Migration
             $table->integer('disable')->default(0); //1 slide - 0 no
             $table->integer('type'); //1 phim le - 2 phim bo
             $table->integer('view')->default(0);
+            $table->integer('total_vote')->default(5);
             $table->integer('episode');
             $table->timestamps();
         });

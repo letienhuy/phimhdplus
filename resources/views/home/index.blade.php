@@ -21,17 +21,19 @@
                     </div>
                 </div>
                 <div class="list-film">
-                    <h1 class="title">PHIM BỘ MỚI NHẤT</h1>
+                    <h1 class="title">
+                        PHIM BỘ MỚI NHẤT
+                        <span>
+                            <a href="{{route('phimbo')}}"></a>
+                        </span>
+                    </h1>
                     <div class="swiper-container">
                         <div class="swiper-wrapper">
                             @foreach ($filmBo as $item)
                             <div class="swiper-slide col-md-3 col-sm-3 col-xs-2">
                                 <div class="list-item" title="{{$item->name}}">
-                                    @if (count($item->vote) === 0)
-                                        <div class="star-rank-5"></div>
-                                    @else
-                                        <div class="star-rank-{{round($item->vote->sum('point')/count($item->vote))}}"></div>
-                                    @endif
+                                    <a href="{{route('film', ['uri' => Help::beauty($item->name), 'id' => $item->id])}}" title="{{$item->name}}">
+                                    <div class="star-rank-{{$item->total_vote}}"></div>
                                     @if ($item->type === 2)
                                     <div class="episode">{{sizeof($item->filmDetail)}}/{{$item->episode}}</div>
                                     @endif
@@ -39,8 +41,9 @@
                                     <div class="play"></div>
                                     <div class="black-gradient"></div>
                                     <div class="film-name">
-                                        <a href="{{route('film', ['uri' => Help::beauty($item->name), 'id' => $item->id])}}" title="{{$item->name}}">{{$item->name}}</a>
+                                        {{$item->name}}
                                     </div>
+                                    </a>
                                 </div>
                             </div>
                             @endforeach
@@ -48,17 +51,19 @@
                     </div>
                 </div>
                 <div class="list-film">
-                    <h1 class="title">PHIM LẺ MỚI</h1>
+                    <h1 class="title">
+                        PHIM LẺ MỚI
+                        <span>
+                            <a href="{{route('phimle')}}"></a>
+                        </span>
+                    </h1>
                     <div class="swiper-container">
                         <div class="swiper-wrapper">
                             @foreach ($filmLe as $item)
                             <div class="swiper-slide col-md-3 col-sm-3 col-xs-2">
                                 <div class="list-item" title="{{$item->name}}">
-                                    @if (count($item->vote) === 0)
-                                        <div class="star-rank-5"></div>
-                                    @else
-                                        <div class="star-rank-{{round($item->vote->sum('point')/count($item->vote))}}"></div>
-                                    @endif
+                                    <a href="{{route('film', ['uri' => Help::beauty($item->name), 'id' => $item->id])}}" title="{{$item->name}}">
+                                    <div class="star-rank-{{$item->total_vote}}"></div>
                                     @if ($item->type === 2)
                                     <div class="episode">{{sizeof($item->filmDetail)}}/{{$item->episode}}</div>
                                     @endif
@@ -66,8 +71,9 @@
                                     <div class="play"></div>
                                     <div class="black-gradient"></div>
                                     <div class="film-name">
-                                        <a href="{{route('film', ['uri' => Help::beauty($item->name), 'id' => $item->id])}}" title="{{$item->name}}">{{$item->name}}</a>
+                                        {{$item->name}}
                                     </div>
+                                    </a>
                                 </div>
                             </div>
                             @endforeach
@@ -75,17 +81,19 @@
                     </div>
                 </div>
                 <div class="list-film">
-                    <h1 class="title">TOP PHIM MỚI</h1>
+                    <h1 class="title">
+                        TOP PHIM MỚI
+                        <span>
+                            <a href="{{route('phimmoi')}}"></a>
+                        </span>
+                    </h1>
                     <div class="swiper-container">
                         <div class="swiper-wrapper">
                             @foreach ($filmNew as $item)
                             <div class="swiper-slide col-md-3 col-sm-3 col-xs-2">
                                 <div class="list-item" title="{{$item->name}}">
-                                    @if (count($item->vote) === 0)
-                                        <div class="star-rank-5"></div>
-                                    @else
-                                        <div class="star-rank-{{round($item->vote->sum('point')/count($item->vote))}}"></div>
-                                    @endif
+                                    <a href="{{route('film', ['uri' => Help::beauty($item->name), 'id' => $item->id])}}" title="{{$item->name}}">
+                                    <div class="star-rank-{{$item->total_vote}}"></div>
                                     @if ($item->type === 2)
                                     <div class="episode">{{sizeof($item->filmDetail)}}/{{$item->episode}}</div>
                                     @endif
@@ -93,8 +101,9 @@
                                     <div class="play"></div>
                                     <div class="black-gradient"></div>
                                     <div class="film-name">
-                                        <a href="{{route('film', ['uri' => Help::beauty($item->name), 'id' => $item->id])}}" title="{{$item->name}}">{{$item->name}}</a>
+                                        {{$item->name}}
                                     </div>
+                                    </a>
                                 </div>
                             </div>
                             @endforeach
@@ -108,11 +117,8 @@
                             @foreach ($filmMostView as $item)
                             <div class="swiper-slide col-md-3 col-sm-3 col-xs-2">
                                 <div class="list-item" title="{{$item->name}}">
-                                    @if (count($item->vote) === 0)
-                                        <div class="star-rank-5"></div>
-                                    @else
-                                        <div class="star-rank-{{round($item->vote->sum('point')/count($item->vote))}}"></div>
-                                    @endif
+                                    <a href="{{route('film', ['uri' => Help::beauty($item->name), 'id' => $item->id])}}" title="{{$item->name}}">
+                                    <div class="star-rank-{{$item->total_vote}}"></div>
                                     @if ($item->type === 2)
                                     <div class="episode">{{sizeof($item->filmDetail)}}/{{$item->episode}}</div>
                                     @endif
@@ -120,8 +126,9 @@
                                     <div class="play"></div>
                                     <div class="black-gradient"></div>
                                     <div class="film-name">
-                                        <a href="{{route('film', ['uri' => Help::beauty($item->name), 'id' => $item->id])}}" title="{{$item->name}}">{{$item->name}}</a>
+                                        {{$item->name}}
                                     </div>
+                                    </a>
                                 </div>
                             </div>
                             @endforeach
@@ -136,7 +143,6 @@
                 <div class="list-film">
                     <h1 class="title">TOP PHIM - PHIMHD+</h1>
                     <div class="list-item-bar">
-
                     </div>
                 </div>
             </div>

@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-
+use Auth;
 class RedirectIfNotAdminstrator
 {
     /**
@@ -15,6 +15,11 @@ class RedirectIfNotAdminstrator
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if(Auth::check()){
+            if(Auth::user()->right === 1){
+                return $next($request);
+            }
+        }
+        return abort(404);
     }
 }

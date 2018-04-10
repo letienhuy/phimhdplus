@@ -100,13 +100,21 @@ class DetailController extends Controller
     }
     public function vote(Request $request, $id){
         $film = Film::findOrFail($id);
-        $vote = Vote::where([['film_id', $id], ['user_id', Auth::id()]])->first();
-        if(is_null($vote)){
-            $vote = new Vote;
-            $vote->film_id = $film->id;
-            $vote->user_id = Auth::id();
-            $vote->point = $request->point;
-            $vote->save();
+        $userVote = Vote::where([['film_id', $id], ['user_id', Auth::id()]])->first();
+        $filmVote = Vote::where('film_id', $id)->get();
+        if(is_null($userVote)){
+            $userVote = new Vote;
+            $userVote->film_id = $film->id;
+            $userVote->user_id = Auth::id();
+            $userVote->point = $request->point;
+            if(count($filmVote) === 0){
+                $total_point = $request->point;
+            } else {
+                $total_point = round(($filmVote->sum('point') + $request->point) / (count($filmVote) + 1));                
+            }
+            $film->total_vote = $total_point;
+            $film->save();
+            $userVote->save();
             return response()->json(['code' => 1]);            
         } else {
             return response()->json(['code' => 0]);                    

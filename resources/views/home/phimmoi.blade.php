@@ -21,9 +21,9 @@
                 </div>
             </div>
             <div class="list-film">
-                <h1 class="title" style="text-transform: uppercase">THỂ LOẠI: {{count($category->parent) > 0 ? $category->parent->name.' - ' : ""}}{{$category->name}}</h1>
+                <h1 class="title" style="text-transform: uppercase">TOP MỚI NHẤT</h1>
                 <div class="row">
-                    @foreach ($film as $item)
+                    @foreach ($filmMoi as $item)
                     <div class="col-md-3 col-sm-4 col-xs-6">
                         <div class="list-item" title="{{$item->name}}">
                             <div class="star-rank-{{$item->total_vote}}"></div>
@@ -40,7 +40,7 @@
                     </div>
                     @endforeach
                 </div>
-                    @if (count($film) === 0)
+                    @if (count($filmMoi) === 0)
                         <table class="admin-table">
                             <tr>
                                 <td>
@@ -49,7 +49,7 @@
                             </tr>
                         </table>
                     @endif
-                {{$film->links()}}
+                {{$filmMoi->links()}}
             </div>
         </div>
         <div class="col-md-3 col-sm-4">

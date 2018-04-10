@@ -14,7 +14,9 @@
             @foreach ($film as $item)
                 <tr>
                     <td>{{$item->id}}</td>
-                    <td style="text-align: left;">{{$item->name}}</td>
+                    <td style="text-align: left;">
+                            <a href="{{route('film', ['id' => $item->id, 'uri' => Help::beauty($item->name)])}}" title="{{$item->name}}">{{$item->name}}</a>
+                    </td>
                     <td><img src="{{$item->poster}}" alt="" width="50px" height="50px"></td>
                     <td>
                             <a href="{{route('admin.film.source', ['id' => $item->id])}}">

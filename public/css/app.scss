@@ -627,6 +627,13 @@ $title_color: rgb(255, 94, 0);
         padding: 15px;
         padding-top: 25px;
         z-index: 9999;
+        a {
+            text-decoration: none;
+        }
+        .button {
+            width: 100%;
+            border-radius: 0;
+        }
         span.closex {
             width: 20px;
             height: 20px;

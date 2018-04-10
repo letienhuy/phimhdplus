@@ -42,6 +42,9 @@
                         <input type="text" name="episode" value="1">
                         <label for="">Poster:</label>
                         <input type="file" name="poster">
+                        hoặc
+                        <label for="">Url Poster:</label>
+                        <input type="text" name="poster">
                         <br>
                         <input type="checkbox" name="is_slide"> Đặt làm Slide <br>
                         <input type="checkbox" name="disable"> Ẩn phim

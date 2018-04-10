@@ -9,7 +9,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="{{$title ?? $setting->title}}" />
     <meta property="og:description" content="{{$description ?? $setting->descriptions}}" />
-    <meta property="og:image" content="{{$imagePoster ?? ''}}" />
+    <meta property="og:image" content="{{$film->poster ?? asset('css/icons/logo.jpg')}}" />
     <meta name="description" content="{{$description ?? $setting->descriptions}}">
     <meta name="keywords" content="{{$keyword ?? $setting->keywords}}">
     <base href="{{url('')}}">
@@ -37,7 +37,7 @@
     <header>
     <div class="header-logo">
     <a href="{{route('home')}}" title="Home">
-        <img src="http://huyit.me/images/images/nameShop.png" alt="LOGO"/>
+        <img src="{{asset('css/icons/logo.jpg')}}" alt="LOGO"/>
     </a>
     </div>
     <div class="search-box">

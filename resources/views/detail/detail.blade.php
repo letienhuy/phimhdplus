@@ -41,9 +41,11 @@
                     @endif
                     <span>Đánh giá:
                         @if (count($film->vote) === 0)
-                            5/5
+                            <span class="star-point">5</span>
                         @else
-                            {{round($film->vote->sum('point')/count($film->vote))}}/5
+                        <span class="star-point">
+                            {{round($film->vote->sum('point')/count($film->vote))}}
+                        </span>
                         @endif
                         <i class="fa fa-star" style="color: #ED8A19"></i> ({{count($film->vote)}} votes)</span>           
                     <span>Lượt xem: {{$film->view}}</span>

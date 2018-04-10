@@ -35,15 +35,33 @@
                     {{$film->name}}
                 </h1>
                 @if (Auth::check())
-                    @if (count(App\Vote::where([['film_id', $film->id], ['user_id', Auth::id()]])->get()) === 0)
+                    @if (count(Auth::user()->vote()->where('film_id', $film->id)->get()) === 0)
                         <div class="film-vote">
-                            <span>Đánh Giá Phim Này</span>
+                            <span>ĐÁNH GIÁ PHIM</span>
+                            <span>
+                                <span class="star-point">0</span>
+                            </span>
                             <div class="list-star" data-id="{{$film->id}}">
                                 <span class="star-white"></span>
                                 <span class="star-white"></span>
                                 <span class="star-white"></span>
                                 <span class="star-white"></span>
                                 <span class="star-white"></span>
+                            </div>
+                        </div>
+                    @else
+                        <div class="film-vote">
+                            <span>BẠN ĐÃ ĐÁNH GIÁ</span>
+                            <span>
+                                <span class="star-point">{{Auth::user()->vote()->where('film_id', $film->id)->first()->point}}</span>
+                            </span>
+                            <div class="list-star">
+                                @for ($i = 0; $i < Auth::user()->vote()->where('film_id', $film->id)->first()->point; $i++)
+                                    <span class="star"></span>
+                                @endfor
+                                @for ($i = 0; $i < (5 - Auth::user()->vote()->where('film_id', $film->id)->first()->point); $i++)
+                                    <span class="star-white2"></span>
+                                @endfor
                             </div>
                         </div>
                     @endif

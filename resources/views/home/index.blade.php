@@ -21,81 +21,87 @@
                     </div>
                 </div>
                 <div class="list-film">
-                    <h1 class="title">PHIM BỘ</h1>
-                    <div class="row">
-                        @foreach ($filmBo as $item)
-                        <div class="col-md-3 col-sm-3 col-xs-6">
-                            <div class="list-item" title="{{$item->name}}">
-                                @if (count($item->vote) === 0)
-                                    <div class="star-rank-5"></div>
-                                @else
-                                    <div class="star-rank-{{round($item->vote->sum('point')/count($item->vote))}}"></div>
-                                @endif
-                                @if ($item->type === 2)
-                                <div class="episode">{{sizeof($item->filmDetail)}}/{{$item->episode}}</div>
-                                @endif
-                                <div class="thumb" style="background-image: url({{$item->poster}});"></div>
-                                <div class="play"></div>
-                                <div class="black-gradient"></div>
-                                <div class="film-name">
-                                    <a href="{{route('film', ['uri' => Help::beauty($item->name), 'id' => $item->id])}}" title="{{$item->name}}">{{$item->name}}</a>
+                    <h1 class="title">PHIM BỘ MỚI NHẤT</h1>
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            @foreach ($filmBo as $item)
+                            <div class="swiper-slide col-md-3 col-sm-3 col-xs-2">
+                                <div class="list-item" title="{{$item->name}}">
+                                    @if (count($item->vote) === 0)
+                                        <div class="star-rank-5"></div>
+                                    @else
+                                        <div class="star-rank-{{round($item->vote->sum('point')/count($item->vote))}}"></div>
+                                    @endif
+                                    @if ($item->type === 2)
+                                    <div class="episode">{{sizeof($item->filmDetail)}}/{{$item->episode}}</div>
+                                    @endif
+                                    <div class="thumb" style="background-image: url({{$item->poster}});"></div>
+                                    <div class="play"></div>
+                                    <div class="black-gradient"></div>
+                                    <div class="film-name">
+                                        <a href="{{route('film', ['uri' => Help::beauty($item->name), 'id' => $item->id])}}" title="{{$item->name}}">{{$item->name}}</a>
+                                    </div>
                                 </div>
                             </div>
+                            @endforeach
                         </div>
-                        @endforeach
                     </div>
                 </div>
                 <div class="list-film">
-                    <h1 class="title">PHIM LẺ</h1>
-                    <div class="row">
-                        @foreach ($filmLe as $item)
-                        <div class="col-md-3 col-sm-3 col-xs-6">
-                            <div class="list-item" title="{{$item->name}}">
-                                @if (count($item->vote) === 0)
-                                    <div class="star-rank-5"></div>
-                                @else
-                                    <div class="star-rank-{{round($item->vote->sum('point')/count($item->vote))}}"></div>
-                                @endif
-                                @if ($item->type === 2)
-                                <div class="episode">{{sizeof($item->filmDetail)}}/{{$item->episode}}</div>
-                                @endif
-                                <div class="thumb" style="background-image: url({{$item->poster}});"></div>
-                                <div class="play"></div>
-                                <div class="black-gradient"></div>
-                                <div class="film-name">
-                                    <a href="{{route('film', ['uri' => Help::beauty($item->name), 'id' => $item->id])}}" title="{{$item->name}}">{{$item->name}}</a>
+                    <h1 class="title">PHIM LẺ MỚI</h1>
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            @foreach ($filmLe as $item)
+                            <div class="swiper-slide col-md-3 col-sm-3 col-xs-2">
+                                <div class="list-item" title="{{$item->name}}">
+                                    @if (count($item->vote) === 0)
+                                        <div class="star-rank-5"></div>
+                                    @else
+                                        <div class="star-rank-{{round($item->vote->sum('point')/count($item->vote))}}"></div>
+                                    @endif
+                                    @if ($item->type === 2)
+                                    <div class="episode">{{sizeof($item->filmDetail)}}/{{$item->episode}}</div>
+                                    @endif
+                                    <div class="thumb" style="background-image: url({{$item->poster}});"></div>
+                                    <div class="play"></div>
+                                    <div class="black-gradient"></div>
+                                    <div class="film-name">
+                                        <a href="{{route('film', ['uri' => Help::beauty($item->name), 'id' => $item->id])}}" title="{{$item->name}}">{{$item->name}}</a>
+                                    </div>
                                 </div>
                             </div>
+                            @endforeach
                         </div>
-                        @endforeach
                     </div>
                 </div>
                 <div class="list-film">
                     <h1 class="title">TOP PHIM MỚI</h1>
-                    <div class="row">
-                        @foreach ($filmNew as $item)
-                        <div class="col-md-3 col-sm-3 col-xs-6">
-                            <div class="list-item" title="{{$item->name}}">
-                                @if (count($item->vote) === 0)
-                                    <div class="star-rank-5"></div>
-                                @else
-                                    <div class="star-rank-{{round($item->vote->sum('point')/count($item->vote))}}"></div>
-                                @endif
-                                @if ($item->type === 2)
-                                <div class="episode">{{sizeof($item->filmDetail)}}/{{$item->episode}}</div>
-                                @endif
-                                <div class="thumb" style="background-image: url({{$item->poster}});"></div>
-                                <div class="play"></div>
-                                <div class="black-gradient"></div>
-                                <div class="film-name">
-                                    <a href="{{route('film', ['uri' => Help::beauty($item->name), 'id' => $item->id])}}" title="{{$item->name}}">{{$item->name}}</a>
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            @foreach ($filmNew as $item)
+                            <div class="swiper-slide col-md-3 col-sm-3 col-xs-2">
+                                <div class="list-item" title="{{$item->name}}">
+                                    @if (count($item->vote) === 0)
+                                        <div class="star-rank-5"></div>
+                                    @else
+                                        <div class="star-rank-{{round($item->vote->sum('point')/count($item->vote))}}"></div>
+                                    @endif
+                                    @if ($item->type === 2)
+                                    <div class="episode">{{sizeof($item->filmDetail)}}/{{$item->episode}}</div>
+                                    @endif
+                                    <div class="thumb" style="background-image: url({{$item->poster}});"></div>
+                                    <div class="play"></div>
+                                    <div class="black-gradient"></div>
+                                    <div class="film-name">
+                                        <a href="{{route('film', ['uri' => Help::beauty($item->name), 'id' => $item->id])}}" title="{{$item->name}}">{{$item->name}}</a>
+                                    </div>
                                 </div>
                             </div>
+                            @endforeach
                         </div>
-                        @endforeach
                     </div>
                 </div>
-                <div class="list-film top-film">
+                <div class="list-film">
                     <h1 class="title">TOP PHIM XEM NHIỀU</h1>
                     <div class="swiper-container">
                         <div class="swiper-wrapper">
@@ -147,8 +153,8 @@
         },
         });
         var width = window.innerWidth;
-        var newFilm = new Swiper('.top-film .swiper-container', {
-            slidesPerView: width <= 480 ? 2 : width > 480 && width <= 768 ? 3 : 4,
+        var newFilm = new Swiper('.list-film .swiper-container', {
+            slidesPerView: width <= 480 ? 2 : width > 480 && width <= 1024 ? 3 : 4,
             slidesPerColumn: 2
         });
     </script>

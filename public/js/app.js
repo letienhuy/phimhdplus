@@ -200,6 +200,8 @@ $(document).on('click', '.star-white', function(e) {
         success: function(res) {
             if (res.code) {
                 selected = true;
+                $('.film-vote span:first-child').text("BẠN ĐÃ ĐÁNH GIÁ");
+                $('.star-point').text(index);
             }
         }
     });
@@ -212,12 +214,14 @@ $(document).on('mouseover', '.star-white', function(e) {
     for (var i = 0; i <= index; i++) {
         $('.list-star .star-white:eq(' + i + ')').addClass('star');
     }
+    $('.star-point').text(++index);
 });
 $(document).on('mouseleave', '.star-white', function(e) {
     if (selected) {
         return false;
     }
     $('.list-star').children().removeClass('star');
+    $('.star-point').text(0);
 });
 $(document).on('change', 'input[name=category_parent]', function(e) {
     var id = this.value;

@@ -25,10 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $filmBo = Film::where([['type', 2], ['disable', 0]])->get(); 
-        $filmLe = Film::where([['type', 1], ['disable', 0]])->get(); 
-        $filmNew = Film::where('disable', 0)->orderBy('id', 'DESC')->get(); 
-        $filmMostView = Film::where('disable', 0)->orderBy('view', 'DESC')->get();
+        $filmBo = Film::where([['type', 2], ['disable', 0]])->limit(24)->get(); 
+        $filmLe = Film::where([['type', 1], ['disable', 0]])->limit(24)->get(); 
+        $filmNew = Film::where('disable', 0)->orderBy('id', 'DESC')->limit(24)->get(); 
+        $filmMostView = Film::where('disable', 0)->orderBy('view', 'DESC')->limit(24)->get();
         return view('home.index', [
             'filmBo' => $filmBo,
             'filmLe' => $filmLe,

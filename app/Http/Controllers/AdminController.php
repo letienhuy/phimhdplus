@@ -35,14 +35,19 @@ class AdminController extends Controller
                         $category = $request->category ?? [];
                         array_unshift($category, $categoryParent->id);
                         $film->category = json_encode($category);
-                        $posterName = md5(time()).$request->poster->getClientOriginalExtension();
-                        if($request->poster->move(public_path('upload/posters'), $posterName)){
-                            $film->poster = url('upload/posters/'.$posterName);
-                            $film->save();
-                            return response()->json(['message' => 'Thêm phim <b>'.$film->name.'</b> thành công. Click <a href="'.route('admin.film.source', ['id' => $film->id]).'">vào đây</a> để quản lý resource phim']);                            
+                        if($request->hasFile('poster')){
+                            $posterName = md5(time()).$request->poster->getClientOriginalExtension();
+                            if($request->poster->move(public_path('upload/posters'), $posterName)){
+                                $film->poster = url('upload/posters/'.$posterName);                          
+                            } else {
+                            return response()->json(['message' => 'Có lỗi xảy ra, vui lòng thử lại sau giây lát'], 422);                            
+                            }
                         } else {
-                        return response()->json(['message' => 'Có lỗi xảy ra, vui lòng thử lại sau giây lát'], 422);                            
+                            $film->poster = $request->poster;
+                            $film->save();
+                            return response()->json(['message' => 'Thêm phim <b>'.$film->name.'</b> thành công. Click <a href="'.route('admin.film.source', ['id' => $film->id]).'">vào đây</a> để quản lý resource phim']);  
                         }
+                        
                     }
                 } else {
                     $categoryParent = Category::where('parent_id', 0)->get();

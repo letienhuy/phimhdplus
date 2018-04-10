@@ -69,7 +69,7 @@ class Helper{
 
     public static function tags($film){
         $html = "";
-        if($film->tags === ""){
+        if(empty($film->tags)){
             $html .= '<a href="'.route('tag', ['key' => $film->name]).'">'.$film->name.'</a>';            
             return $html;
         } else {

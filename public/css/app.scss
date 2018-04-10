@@ -355,6 +355,13 @@ $title_color: rgb(255, 94, 0);
             }
         }
     }
+    .star-point {
+        display: inline-block !important;
+        line-height: 15px !important;
+        padding: 5px;
+        background: #f00;
+        font-weight: bold;
+    }
     .film-action {
         padding: 5px;
         .off-ads {
@@ -401,13 +408,15 @@ $title_color: rgb(255, 94, 0);
         padding: 10px;
         span {
             font-size: 16px;
+            line-height: 30px;
             display: block;
             text-align: center;
         }
         .list-star {
             text-align: center;
             .star,
-            .star-white {
+            .star-white,
+            .star-white2 {
                 width: 30px;
                 height: 30px;
                 display: inline-block;

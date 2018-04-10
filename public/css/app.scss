@@ -770,13 +770,10 @@ $title_color: rgb(255, 94, 0);
         padding: 5px;
         margin-bottom: 5px;
     }
-    .admin-table-bar {
-        width: 100%;
-        overflow-x: auto;
-    }
     .admin-table {
         width: 100%;
         border: 1px solid #ddd;
+        margin: 5px 0;
         th,
         td {
             text-align: center;

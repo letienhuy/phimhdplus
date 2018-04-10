@@ -29,6 +29,11 @@
                     </td>
                 </tr>
             @endforeach
+            @if (count($film) === 0)
+                <tr>
+                    <td colspan="4">Chưa có phim nào!</td>
+                </tr>
+            @endif
         </table>
     </div>
         {{$film->links()}}

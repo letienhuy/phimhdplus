@@ -44,7 +44,7 @@
                 </table>
             </div>
             {{$filmDetail->links()}}
-            @if ($film->type === 2 && count($filmDetail) < $film->episode)
+            @if (count($filmDetail) < $film->episode)
                 <a href="{{route('admin.film.source', ['action' => 'add', 'id' => $film->id])}}"><button class="btn btn-success">Thêm resource phim</button></a>                            
             @endif
         </div>

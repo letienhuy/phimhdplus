@@ -134,8 +134,8 @@ class AdminController extends Controller
         switch($action){
             case 'add':
                 $film = Film::findOrFail($id);
-                if($film->type === 1 || count($film->filmDetail) === $film->episode){
-                    return redirect()->route('admin.film.source', ['id' => $film->id]);
+                if(count($film->filmDetail) >= $film->episode){
+                    return response()->json(['message' => 'Phim chỉ có '.count($film->filmDetail).' tập, không thể thêm resource'], 422);
                 }
                 if($request->method() === "POST"){
                     if(empty($request->name) || empty($request->m18) || empty($request->m22) || empty($request->m36) || empty($request->m18_vip) || empty($request->m22_vip) || empty($request->m36_vip)){
@@ -209,7 +209,7 @@ class AdminController extends Controller
                     return view('dialog', ['html' => $html]);
                 }
             break;
-           default:
+            default:
                 $film = Film::findOrFail($request->id);
                 return view('admin.film.source.index', ['film' => $film, 'filmDetail' => $film->filmDetail()->paginate(20)]);
         }

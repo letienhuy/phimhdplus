@@ -9,7 +9,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="{{$title ?? $setting->title}}" />
     <meta property="og:description" content="{{$description ?? $setting->descriptions}}" />
-    <meta property="og:image" content="{{$film->poster ?? asset('css/icons/logo.jpg')}}" />
+    <meta property="og:image" content="{{$imagePoster ?? asset('css/icons/logo.jpg')}}" />
     <meta name="description" content="{{$description ?? $setting->descriptions}}">
     <meta name="keywords" content="{{$keyword ?? $setting->keywords}}">
     <base href="{{url('')}}">

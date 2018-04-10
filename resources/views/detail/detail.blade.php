@@ -1,7 +1,7 @@
 @extends('master')
 @section('content')
     <div class="container">
-        <div class="col-md-9">
+        <div class="col-md-9 col-sm-8">
             <a href="{{route('film.view', ['uri' => Help::beauty($film->name), 'id' => $film->id])}}">
             <div class="slide-home">
                 <div class="thumb" style="background-image: url({{$film->poster}});"></div>
@@ -66,7 +66,7 @@
                 <div class="fb-comments" data-href="{{url()->current()}}" data-numposts="10"></div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-4">
 
         </div>
     </div>

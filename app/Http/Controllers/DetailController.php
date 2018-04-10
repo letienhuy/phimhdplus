@@ -14,7 +14,7 @@ class DetailController extends Controller
 {
     public function category($id){
         $category = Category::findOrFail($id);
-        $film = Film::where([['category', 'like', '%'.$category->id.'%'], ['disable', 0]])->get();
+        $film = Film::where([['category', 'like', '%'.$category->id.'%'], ['disable', 0]])->paginate(24);
         return view('detail.category', ['category' => $category, 'film' => $film]);
     }
     public function detail($id){
@@ -30,6 +30,59 @@ class DetailController extends Controller
     public function download($id){
         $film = Film::findOrFail($id);
         return view('detail.download', ['film' => $film]);
+    }
+    public function getDownload($id){
+        $filmDetail = FilmDetail::findOrFail($id);
+        $link = [];
+        $link['m18'] = route('film.download.start', ['uri' => base64_encode($filmDetail->name.'.'.$filmDetail->id.'.m18')]);
+        $link['m22'] = route('film.download.start', ['uri' => base64_encode($filmDetail->name.'.'.$filmDetail->id.'.m22')]);
+        $link['m36'] = route('film.download.start', ['uri' => base64_encode($filmDetail->name.'.'.$filmDetail->id.'.m36')]);
+        return response()->json($link);
+    }
+    public function startDownload($uri){
+        $uri = explode('.', base64_decode($uri));
+        $filmDetail = FilmDetail::findOrFail($uri[1]);
+        switch($uri[2]){
+            case 'm18':
+                if(Auth::user()->vip){
+                    if(file_exists($filmDetail->source_vip1)){
+                        return response()->download($filmDetail->source_vip1);
+                    }
+                    return redirect($filmDetail->source_vip1);                    
+                }
+                if(file_exists($filmDetail->source1)){
+                    return response()->download($filmDetail->source1);
+                }
+                return redirect($filmDetail->source1);            
+            break;
+            case 'm22':
+                if(Auth::user()->vip){
+                    if(file_exists($filmDetail->source_vip1)){
+                        return response()->download($filmDetail->source_vip2);
+                    }
+                    return redirect($filmDetail->source_vip2);                    
+                }
+                if(file_exists($filmDetail->source1)){
+                    return response()->download($filmDetail->source2);
+                }
+                return redirect($filmDetail->source2);
+            break;
+            case 'm36':
+                if(Auth::user()->vip){
+                    if(file_exists($filmDetail->source_vip1)){
+                        return response()->download($filmDetail->source_vip3);
+                    }
+                    return redirect($filmDetail->source_vip3);                    
+                }
+                if(file_exists($filmDetail->source1)){
+                    return response()->download($filmDetail->source3);
+                }
+                return redirect($filmDetail->source3);
+            break;
+            default:
+                abort(404);
+            break;
+        }
     }
     public function like($id){
         $film = Film::findOrFail($id);

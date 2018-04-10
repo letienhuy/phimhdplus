@@ -120,6 +120,26 @@ $(document).on('click', '.film-eposide span', function() {
         }
     });
 });
+$(document).on('click', '.film-eposide-download span', function() {
+    var id = $(this).data('eposide');
+    var active = $('.film-eposide-download span.active');
+    if ($(this).hasClass('active')) {
+        return false;
+    }
+    active.removeClass('active');
+    $(this).addClass('active');
+    $('#download-div').hide();
+    $.ajax({
+        url: homeUrl + '/ajax/download/' + id,
+        processData: false,
+        success: function(res) {
+            $('#download-div').show();
+            $('#download-m18').attr('href', res.m18);
+            $('#download-m22').attr('href', res.m22);
+            $('#download-m36').attr('href', res.m36);
+        }
+    });
+});
 $(document).on('click', '.over, .closex', function() {
     $('.login-dialog').remove();
     $('.over').remove();

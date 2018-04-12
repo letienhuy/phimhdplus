@@ -37,7 +37,8 @@ Route::group(['prefix' => 'ajax'], function(){
     Route::get('/download/{id}', 'DetailController@getDownload');
     Route::any('/report/{id}', 'DetailController@report');
     Route::any('/like/{id}', 'DetailController@like')->middleware('auth');
-    Route::any('/vote/{id}', 'DetailController@vote')->middleware('auth');
+    Route::any('/like/{id}', 'DetailController@like')->middleware('auth');
+    Route::get('/upgrade', 'UserController@upgradeAjax')->middleware('auth');
 });
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
     Route::get('/', 'AdminController@index')->name('admin');
@@ -46,6 +47,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
 });
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
     Route::get('/', 'UserController@index')->name('user');
-    Route::get('/info', 'UserController@info')->name('user.info');
-    Route::get('/like', 'UserController@info')->name('user.like');
+    Route::any('/change-password', 'UserController@changePassword')->name('user.pass');
+    Route::any('/change-avatar', 'UserController@changeAvatar')->name('user.avatar');
+    Route::any('/upgrade', 'UserController@upgrade')->name('user.upgrade');
 });

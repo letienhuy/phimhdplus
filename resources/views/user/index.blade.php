@@ -1,22 +1,66 @@
 @extends('master')
 @section('content')
     <div class="container">
-        <h1 class="title">Trang người dùng</h1>
+        <h1 class="title">Quản lý tài khoản</h1>
         <div class="row">
             <div class="col-md-3 col-sm-4">
                 <div class="list-film">
                     <h1 class="title">CHỨC NĂNG</h1>
                     <ul class="admin-slide">
-                        <li><a href="{{route('admin.film')}}">Quản lý phim</a></li>
-                        <li>Quản lý danh mục</li>
-                        <li>Quản lý người dùng</li>
-                        <li>Danh sách báo lỗi</li>
+                        <li><a href="{{route('user.avatar')}}">Đổi avatar</a></li>
+                        <li>
+                            <a href="{{route('user.pass')}}">
+                            @if (empty(Auth::user()->password))
+                                <b style="color: red">Đặt mật khẩu</b>
+                            @else
+                                Đổi mật khẩu
+                            @endif
+                        </a></li>
+                        @if(!Auth::user()->vip)
+                            <li><a href="{{route('user.upgrade')}}" style="color: red; font-weight: bold;">Nâng cấp VIP</a></li>
+                        @endif
+                        <li>Nạp Credit</li>
                         <li>Yêu cầu post phim</li>
-                        <li>Cài đặt trang web</li>
                     </ul>
                 </div>
             </div>
             <div class="col-md-9 col-sm-8">
+                <div class="list-film row">
+                    <h3 class="title">Tài khoản: {{Auth::user()->email}}</h3>
+                    <div class="col-md-3 col-sm-3">
+                        <div class="list-item">
+                            <div class="thumb" style="background-image: url({{Auth::user()->avatar}})"></div>
+                        </div>
+                    </div>
+                    <div class="user-info col-md-9 col-sm-9">
+                        <span>Email: {{Auth::user()->email}}</span>
+                        <span style="color: red;">Credit: {{number_format(Auth::user()->credit)}}</span>
+                        <span>Thành viên: 
+                            @if (Auth::user()->vip)
+                                <label for="" class="label label-danger">VIP</label>
+                            @else
+                                <label for="" class="label label-default">Free</label>
+                                <button class="btn btn-success" id="upgrade-button">Nâng cấp VIP</button>
+                            @endif
+                        </span>
+                        <a href="{{route('user.avatar')}}">
+                            <button class="btn btn-primary">
+                                Đổi avatar
+                            </button>
+                        </a>
+                        <a href="{{route('user.pass')}}">
+                            @if (empty(Auth::user()->password))
+                                <button class="btn btn-warning">
+                                    Đặt mật khẩu
+                                </button>
+                            @else
+                                <button class="btn btn-danger">
+                                    Đổi mật khẩu
+                                </button>
+                            @endif
+                        </a>
+                    </div>
+                </div>
                 <div class="list-film">
                     <h1 class="title">PHIM YÊU THÍCH</h1>
                     <div style="overflow-x: auto">

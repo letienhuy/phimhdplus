@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             'title' => 'PhimHD+ - PhimHD Online',
             'keywords' => 'phimhd online, phimhd moi nhat, phimhd+, phimhd mien phi',
             'descriptions' => 'PhimHD online cập nhật mới nhất',
+            'vip' => 99
         ]);
     }
 }

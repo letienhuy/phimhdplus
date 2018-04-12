@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('email');
             $table->string('password')->nullable();
-            $table->string('avatar')->default('uploads/images/user_default.png');
+            $table->string('avatar');
             $table->string('api_token')->nullable();
             $table->integer('right')->default(0);
             $table->integer('credit')->default(0);

@@ -27,6 +27,9 @@ class AdminController extends Controller
                         $film->actor = $request->actor;
                         $film->director = $request->director;
                         $film->about = $request->about;
+                        if($categoryParent->type === 1 && $request->episode > 1){
+                            return response()->json(['message' => 'Phim lẻ không được nhiều hơn 1 tập'], 422);                                                        
+                        }
                         $film->episode = $request->episode;
                         $film->type = $categoryParent->type;
                         $film->is_slide = $request->is_slide == "on" ? 1 : 0;
@@ -43,6 +46,9 @@ class AdminController extends Controller
                             return response()->json(['message' => 'Có lỗi xảy ra, vui lòng thử lại sau giây lát'], 422);                            
                             }
                         } else {
+                            if(empty($request->poster)){
+                                return response()->json(['message' => 'Vui lòng điền poster phim'], 422);                                                        
+                            }
                             $film->poster = $request->poster;
                             $film->save();
                             return response()->json(['message' => 'Thêm phim <b>'.$film->name.'</b> thành công. Click <a href="'.route('admin.film.source', ['id' => $film->id]).'">vào đây</a> để quản lý resource phim']);  
@@ -65,6 +71,9 @@ class AdminController extends Controller
                         $film->actor = $request->actor;
                         $film->director = $request->director;
                         $film->about = $request->about;
+                        if($categoryParent->type === 1 && $request->episode > 1){
+                            return response()->json(['message' => 'Phim lẻ không được nhiều hơn 1 tập'], 422);                                                        
+                        }
                         $film->episode = $request->episode;
                         $film->type = $categoryParent->type;
                         $film->is_slide = $request->is_slide == "on" ? 1 : 0;

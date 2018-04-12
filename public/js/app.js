@@ -7,6 +7,11 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': csrfToken
     }
 });
+$(window).resize(function() {
+    setTimeout(function() {
+        location.reload();
+    }, 1000);
+});
 $(document).ready(function() {
     $('.film-name').tooltip();
     $('.btn-toggle').click(function() {
@@ -38,8 +43,6 @@ $(document).ready(function() {
 $(document).on('submit', '#login-form', function(event) {
     event.preventDefault();
     error.remove();
-    var email = $('input[name=email]');
-    var password = $('input[name=password]');
     var btn = $(this).children('.button');
     var data = new FormData(this);
     btn.attr('class', 'btn-loading');
@@ -67,22 +70,9 @@ $(document).on('submit', '#login-form', function(event) {
 $(document).on('submit', '#register-form', function(event) {
     event.preventDefault();
     error.remove();
-    var email = $('input[name=email]');
-    var password = $('input[name=password]');
-    var confirmPassword = $('input[name=confirm_password]');
     var btn = $(this).children('.button');
     var data = new FormData(this);
     btn.attr('class', 'btn-loading');
-    if (email.val() === "") {
-        btn.attr('class', 'button');
-        inputFailed.appendTo(email.parent());
-        error.text("Vui lòng nhập email!").appendTo('#result');
-        return false;
-    } else if (password.val() === "") {
-        btn.attr('class', 'button');
-        error.text("Vui lòng nhập mật khẩu!").appendTo('#result');
-        return false;
-    }
     $.ajax({
         url: homeUrl + '/register',
         data: data,
@@ -158,9 +148,6 @@ $(document).on('click', '.report', function() {
 $(document).on('submit', '#report-form', function(event) {
     event.preventDefault();
     error.remove();
-    var email = $('input[name=email]');
-    var message = $('input[name=message]');
-    var id = $('input[name=film]');
     var btn = $(this).children('.button');
     var data = new FormData(this);
     btn.attr('class', 'btn-loading');
@@ -174,6 +161,52 @@ $(document).on('submit', '#report-form', function(event) {
         success: function(res) {
             btn.attr('class', 'button');
             $("#report-form").remove();
+            success.text(res.message).appendTo('#result');
+        },
+        error: function(err) {
+            btn.attr('class', 'button');
+            error.text(err.responseJSON.message).appendTo('#result');
+        }
+    });
+});
+$(document).on('submit', '#change-pass-form', function(event) {
+    event.preventDefault();
+    error.remove();
+    var btn = $(this).children('.button');
+    var data = new FormData(this);
+    btn.attr('class', 'btn-loading');
+    $.ajax({
+        url: homeUrl + '/user/change-password',
+        data: data,
+        contentType: false,
+        cache: false,
+        processData: false,
+        type: 'POST',
+        success: function(res) {
+            btn.attr('class', 'button');
+            success.text(res.message).appendTo('#result');
+        },
+        error: function(err) {
+            btn.attr('class', 'button');
+            error.text(err.responseJSON.message).appendTo('#result');
+        }
+    });
+});
+$(document).on('submit', '#change-avatar-form', function(event) {
+    event.preventDefault();
+    error.remove();
+    var btn = $(this).children('.button');
+    var data = new FormData(this);
+    btn.attr('class', 'btn-loading');
+    $.ajax({
+        url: homeUrl + '/user/change-avatar',
+        data: data,
+        contentType: false,
+        cache: false,
+        processData: false,
+        type: 'POST',
+        success: function(res) {
+            btn.attr('class', 'button');
             success.text(res.message).appendTo('#result');
         },
         error: function(err) {
@@ -325,12 +358,25 @@ $(document).on('submit', '#edit-film-form', function(event) {
         }
     });
 });
-$(document).on('click', '#delete-film', function(e) {
-    var id = $(this).data('id');
+$(document).on('click', '#upgrade-button', function(e) {
     $.ajax({
-        url: homeUrl + '/admin/film/delete',
-        data: { 'id': id },
+        url: homeUrl + '/ajax/upgrade',
         success: function(res) {
+            $('<div/>').addClass('over').appendTo('body');
+            $('body').append(res);
+        }
+    });
+});
+$(document).on('click', '#confirm-upgrade', function(e) {
+    var btn = $(this);
+    btn.attr('class', 'btn-loading');
+    $.ajax({
+        url: homeUrl + '/user/upgrade',
+        type: "POST",
+        success: function(res) {
+            btn.attr('class', 'button');
+            $('.login-dialog').remove();
+            $('.over').remove();
             $('<div/>').addClass('over').appendTo('body');
             $('body').append(res);
         }

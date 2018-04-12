@@ -19,6 +19,7 @@ class CreateSettingsTable extends Migration
             $table->text('keywords')->nullable();
             $table->text('descriptions')->nullable();
             $table->integer('maintenance')->default(0);
+            $table->integer('vip')->default(0);
             $table->timestamps();
         });
     }

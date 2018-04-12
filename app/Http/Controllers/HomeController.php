@@ -30,11 +30,13 @@ class HomeController extends Controller
         $filmLe = Film::where([['type', 1], ['disable', 0]])->orderBy('id', 'DESC')->limit(24)->get(); 
         $filmNew = Film::where('disable', 0)->orderBy('id', 'DESC')->limit(24)->get(); 
         $filmMostView = Film::where('disable', 0)->orderBy('view', 'DESC')->limit(24)->get();
+        $topRate = Film::where('disable', 0)->orderBy('total_vote', 'DESC')->limit(24)->get();
         return view('home.index', [
             'filmBo' => $filmBo,
             'filmLe' => $filmLe,
             'filmNew' => $filmNew,
-            'filmMostView' => $filmMostView
+            'filmMostView' => $filmMostView,
+            'topRate' => $topRate
         ]);
     }
     public function phimBo(){
@@ -72,7 +74,8 @@ class HomeController extends Controller
             }elseif(is_null($user)){
                 $user = User::create([
                     'email' => $request->email,
-                    'password' => bcrypt($request->password)
+                    'password' => bcrypt($request->password),
+                    'avatar' => asset('css/icons/default.png')
                 ]);
                 if($user){
                     Auth::login($user, true);
@@ -125,7 +128,8 @@ class HomeController extends Controller
                 $user = User::where('email', $data->email ?? $data->id)->get()->first();
                 if(is_null($user)){
                     $user = User::create([
-                        'email' => $data->email
+                        'email' => $data->email,
+                        'avatar' => asset('css/icons/default.png')
                     ]);
                     Auth::login($user, true);
                     return redirect()->route('home');

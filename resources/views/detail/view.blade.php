@@ -27,7 +27,7 @@
                 @endif
                 <button class="report" data-film="{{$film->id}}">
                     <i class="fa fa-flag-checkered"></i>
-                    Báo lỗi
+                    Báo lỗi phim
                 </button>
             </div>
             <div class="list-film">

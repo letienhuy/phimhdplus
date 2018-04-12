@@ -148,6 +148,7 @@ $(document).on('click', '.report', function() {
 $(document).on('submit', '#report-form', function(event) {
     event.preventDefault();
     error.remove();
+    var id = $('input[name=film]').val();
     var btn = $(this).children('.button');
     var data = new FormData(this);
     btn.attr('class', 'btn-loading');
@@ -165,6 +166,7 @@ $(document).on('submit', '#report-form', function(event) {
         },
         error: function(err) {
             btn.attr('class', 'button');
+            console.log(err)
             error.text(err.responseJSON.message).appendTo('#result');
         }
     });

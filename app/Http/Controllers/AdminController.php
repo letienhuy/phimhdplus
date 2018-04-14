@@ -7,6 +7,7 @@ use App\Film;
 use App\Category;
 use App\FilmDetail;
 use App\Report;
+use App\User;
 class AdminController extends Controller
 {
     //
@@ -125,7 +126,7 @@ class AdminController extends Controller
                     $html = "<center><div class='alert alert-warning'>
                     Xác nhận xoá phim <b>$film->name</b>
                     </div>
-                    <button class='btn btn-warning' id='confirm-delete' data-id='$film->id'>Xác nhận</button>
+                    <button class='btn btn-warning' id='confirm-delete-film' data-id='$film->id'>Xác nhận</button>
                     </center>";
                     return view('dialog', ['html' => $html]);
                 }
@@ -221,6 +222,103 @@ class AdminController extends Controller
             default:
                 $film = Film::findOrFail($request->id);
                 return view('admin.film.source.index', ['film' => $film, 'filmDetail' => $film->filmDetail()->paginate(20)]);
+        }
+    }
+    public function category(Request $request, $action = null){
+        switch($action){
+            case 'add':
+            if($request->method() === "POST"){
+                if(empty($request->name) || empty($request->parent_id) && empty($request->type)){
+                    return response()->json(['message' => 'Xin vui lòng nhập đầy đủ thông tin thể loại'], 422);
+                } else {
+                    $category = new Category;
+                    $category->name = $request->name;
+                    $category->parent_id = $request->parent_id ?? 0;
+                    if(!empty($request->parent_id)){
+                        $category->type = Category::find($request->parent_id)->type;
+                    } else{
+                        $category->type = $request->type === 'on' ? 1 : 2;
+                    }
+                    if($category->save()){
+                        return response()->json(['message' => 'Thêm thể loại <b>'.$category->name.'</b> thành công!']);                            
+                    } else {
+                        return response()->json(['message' => 'Có lỗi xảy ra, xin vui lòng thử lại sau giây lát!'], 422);                            
+                    }
+                }
+            } else {
+                return view('admin.category.add');
+            }   
+            break;
+            case 'edit':
+            $category = Category::findOrFail($request->id);
+            if($request->method() === "POST"){
+                if(empty($request->name) || empty($request->parent_id) && empty($request->type)){
+                    return response()->json(['message' => 'Xin vui lòng nhập đầy đủ thông tin thể loại'], 422);
+                } else {
+                    $category->name = $request->name;
+                    $category->parent_id = $request->parent_id ?? 0;
+                    if(!empty($request->parent_id)){
+                        $category->type = Category::find($request->parent_id)->type;
+                    } else{
+                        $category->type = $request->type === 1 ? 1 : $request->type;
+                    }
+                    if($category->save()){
+                        return response()->json(['message' => 'Sửa thể loại <b>'.$category->name.'</b> thành công!']);                            
+                    } else {
+                        return response()->json(['message' => 'Có lỗi xảy ra, xin vui lòng thử lại sau giây lát!'], 422);                            
+                    }
+                }
+            } else {
+                return view('admin.category.edit', ['category' => $category]);
+            }   
+            break;
+            case 'delete':
+                $category = Category::findOrFail($request->id);
+                if(count($category->child) > 0){
+                    $html = "<center><div class='alert alert-danger'>Thể loại này đang chứ thể loại con, vui lòng xoá thể loại con trước khi xoá thể loại này.</div></center>";
+                    return view('dialog', ['html' => $html]);
+                }
+                if($request->method() === "POST"){
+                    $film = Film::where('category', 'like', '%'.$category->id.'%')->get();
+                    foreach($film as $item){
+                        $cat = json_decode($item->category, true);
+                        unset($cat[array_search($category->id, $cat)]);
+                        $item->disable = count($cat) === 0 ? 1 : 0;
+                        $item->category = json_encode($cat);
+                        $item->save();
+                    }                 
+                    if($category->delete()){
+                        $html = "<center><div class='alert alert-success'>
+                        Đã xoá phim <b>$category->name</b> thành công
+                        </div>
+                        </center>";
+                        return view('dialog', ['html' => $html]);
+                    } else {
+                        $html = "<center><div class='alert alert-danger'>
+                        Lỗi khi xoá thể loại <b>$category->name</b>, vui lòng thử lại
+                        </div>
+                        </center>";
+                        return view('dialog', ['html' => $html]);
+                    }
+                } else {
+                    $html = "<center><div class='alert alert-warning'>
+                    Xác nhận xoá thể loại <b>$category->name</b>
+                    </div>
+                    <button class='btn btn-warning' id='confirm-delete-category' data-id='$category->id'>Xác nhận</button>
+                    </center>";
+                    return view('dialog', ['html' => $html]);
+                }
+            break;
+            default:
+            $category = Category::where('parent_id', 0)->paginate(10);
+            return view('admin.category.index', ['category' => $category]);
+        }
+    }
+    public function user(Request $request, $action = null){
+        switch($action){
+            default:
+            $user = User::paginate(10);
+            return view('admin.user.index', ['user' => $user]);
         }
     }
 }

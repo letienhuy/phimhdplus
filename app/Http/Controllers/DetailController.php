@@ -19,13 +19,17 @@ class DetailController extends Controller
     }
     public function detail($id){
         $film = Film::findOrFail($id);
-        return view('detail.detail', ['film' => $film]);
+        $categories = json_decode($film->category, true);
+        $relate = Film::where([['category', 'like', '%'.$categories[array_rand($categories)].'%'], ['disable', 0]])->paginate(12);
+        return view('detail.detail', ['film' => $film, 'relate' => $relate]);
     }
     public function viewFilm($id){
         $film = Film::findOrFail($id);
         $film->view++;
         $film->save();
-        return view('detail.view', ['film' => $film]);
+        $categories = json_decode($film->category, true);
+        $relate = Film::where([['category', 'like', '%'.$categories[array_rand($categories)].'%'], ['disable', 0]])->paginate(12);
+        return view('detail.view', ['film' => $film, 'relate' => $relate]);
     }
     public function download($id){
         $film = Film::findOrFail($id);

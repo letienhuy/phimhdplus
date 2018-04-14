@@ -17,11 +17,9 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         View::composer('*', function ($view) {
-            $view->with(['setting' => Setting::find(1)]);
-        });
-        View::composer('*', function ($view) {
             $slide = Film::where('is_slide', 1)->get();
-            $view->with(['slide' => $slide]);
+            $topRate = Film::where('disable', 0)->orderBy('total_vote', 'DESC')->limit(24)->get();
+            $view->with(['slide' => $slide, 'setting' => Setting::find(1), 'topRate' => $topRate]);
         });
     }
 

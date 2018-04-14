@@ -19,7 +19,7 @@
                         <textarea name="about"></textarea>
                         <label for="">Danh mục:</label>
                         <div class="multiSelect">
-                                <span>Chọn danh mục</span>
+                                <span>Chọn danh mục...</span>
                                 <ul class="dropSelect" id="category_parent">
                                     @foreach ($categoryParent as $item)
                                         <li>
@@ -30,7 +30,7 @@
                             </div>
                         <label for="">Thể loại: (chọn nhiều)</label>
                         <div class="multiSelect">
-                            <span>Chọn nhiều</span>
+                            <span>Chọn nhiều...</span>
                             <ul class="dropSelect" id="dropSelect">
                             </ul>
                         </div>

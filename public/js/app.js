@@ -352,7 +352,55 @@ $(document).on('submit', '#edit-film-form', function(event) {
             btn.attr('class', 'button');
             $('<div/>').addClass('over').appendTo('body');
             $('body').append('<div class="login-dialog"><span class="closex"></span><div class="alert alert-success">' + res.message + '</div></div>');
-            $('#add-film-form')[0].reset();
+        },
+        error: function(err) {
+            btn.attr('class', 'button');
+            error.text(err.responseJSON.message).appendTo('#result');
+        }
+    });
+});
+$(document).on('submit', '#add-category-form', function(event) {
+    event.preventDefault();
+    error.remove();
+    var btn = $(this).children('.button');
+    var data = new FormData(this);
+    btn.attr('class', 'btn-loading');
+    $.ajax({
+        url: homeUrl + '/admin/category/add',
+        data: data,
+        contentType: false,
+        cache: false,
+        processData: false,
+        type: 'POST',
+        success: function(res) {
+            btn.attr('class', 'button');
+            $('<div/>').addClass('over').appendTo('body');
+            $('body').append('<div class="login-dialog"><span class="closex"></span><div class="alert alert-success">' + res.message + '</div></div>');
+            $('#add-category-form')[0].reset();
+        },
+        error: function(err) {
+            btn.attr('class', 'button');
+            error.text(err.responseJSON.message).appendTo('#result');
+        }
+    });
+});
+$(document).on('submit', '#edit-category-form', function(event) {
+    event.preventDefault();
+    error.remove();
+    var btn = $(this).children('.button');
+    var data = new FormData(this);
+    btn.attr('class', 'btn-loading');
+    $.ajax({
+        url: homeUrl + '/admin/category/edit',
+        data: data,
+        contentType: false,
+        cache: false,
+        processData: false,
+        type: 'POST',
+        success: function(res) {
+            btn.attr('class', 'button');
+            $('<div/>').addClass('over').appendTo('body');
+            $('body').append('<div class="login-dialog"><span class="closex"></span><div class="alert alert-success">' + res.message + '</div></div>');
         },
         error: function(err) {
             btn.attr('class', 'button');
@@ -405,8 +453,21 @@ $(document).on('click', '#delete-source', function(e) {
         }
     });
 });
-$(document).on('click', '#confirm-delete', function(e) {
+$(document).on('click', '#delete-category', function(e) {
     var id = $(this).data('id');
+    $.ajax({
+        url: homeUrl + '/admin/category/delete',
+        data: { 'id': id },
+        success: function(res) {
+            $('<div/>').addClass('over').appendTo('body');
+            $('body').append(res);
+        }
+    });
+});
+$(document).on('click', '#confirm-delete-film', function(e) {
+    var id = $(this).data('id');
+    var _this = $(this);
+    _this.attr('class', 'btn-loading');
     $.ajax({
         url: homeUrl + '/admin/film/delete',
         type: "POST",
@@ -419,8 +480,11 @@ $(document).on('click', '#confirm-delete', function(e) {
         }
     });
 });
+
 $(document).on('click', '#confirm-delete-resource', function(e) {
     var id = $(this).data('id');
+    var _this = $(this);
+    _this.attr('class', 'btn-loading');
     $.ajax({
         url: homeUrl + '/admin/film/source/' + id + '/delete',
         type: "POST",
@@ -432,6 +496,27 @@ $(document).on('click', '#confirm-delete-resource', function(e) {
         }
     });
 });
+
+$(document).on('click', '#confirm-delete-category', function(e) {
+    var id = $(this).data('id');
+    var _this = $(this);
+    _this.attr('class', 'btn-loading');
+    $.ajax({
+        url: homeUrl + '/admin/category/delete',
+        type: "POST",
+        data: { 'id': id },
+        success: function(res) {
+            $('.login-dialog').remove();
+            $('.over').remove();
+            $('<div/>').addClass('over').appendTo('body');
+            $('body').append(res);
+        },
+        error: function(err) {
+            console.log(err)
+        }
+    });
+});
+
 submitSourceForm('#add-source-form', 'add');
 submitSourceForm('#edit-source-form', 'edit');
 

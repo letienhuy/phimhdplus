@@ -53,7 +53,7 @@
             </div>
         </div>
         <div class="col-md-3 col-sm-4">
-
+            @include('slide_right')
         </div>
     </div>
     </div>

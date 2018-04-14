@@ -30,13 +30,11 @@ class HomeController extends Controller
         $filmLe = Film::where([['type', 1], ['disable', 0]])->orderBy('id', 'DESC')->limit(24)->get(); 
         $filmNew = Film::where('disable', 0)->orderBy('id', 'DESC')->limit(24)->get(); 
         $filmMostView = Film::where('disable', 0)->orderBy('view', 'DESC')->limit(24)->get();
-        $topRate = Film::where('disable', 0)->orderBy('total_vote', 'DESC')->limit(24)->get();
         return view('home.index', [
             'filmBo' => $filmBo,
             'filmLe' => $filmLe,
             'filmNew' => $filmNew,
-            'filmMostView' => $filmMostView,
-            'topRate' => $topRate
+            'filmMostView' => $filmMostView
         ]);
     }
     public function phimBo(){

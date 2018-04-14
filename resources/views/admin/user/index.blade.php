@@ -26,18 +26,27 @@
                             <td>{{date("H:i d/m/Y", strtotime($item->created_at))}}</td>
                             <td>{{$item->vip ? 'VIP' : 'Free'}}</td>
                             <td>
-                                <a id="upgrade-user" data-id="{{$item->id}}">
-                                    <button class="btn btn-danger">Nâng cấp</button>
-                                </a>
+                                @if ($item->right === 0)
+                                    <a id="upgrade-user" data-id="{{$item->id}}">
+                                        <button class="btn btn-success">Nâng quyền</button>
+                                    </a>
+                                @endif
+                                @if ($item->right === 1)
+                                    <a id="upgrade-user" data-id="{{$item->id}}">
+                                        <button class="btn btn-danger">Hạ quyền</button>
+                                    </a>
+                                @endif
                                 <a id="block-user" data-id="{{$item->id}}">
                                     <button class="btn btn-danger">
                                         {{$item->right === -1 ? 'Mở khoá' : 'Khoá'}}
                                     </button>
                                 </a>
                                 </a>
-                                <a id="delete-user" data-id="{{$item->id}}">
-                                    <button class="btn btn-danger">Xoá</button>
-                                </a>
+                                @if ($item->right !== 1)
+                                    <a id="delete-user" data-id="{{$item->id}}">
+                                        <button class="btn btn-danger">Xoá</button>
+                                    </a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach @if (count($user) === 0)

@@ -52,7 +52,7 @@ class AdminController extends Controller
                             }
                             $film->poster = $request->poster;
                             $film->save();
-                            return response()->json(['message' => 'Thêm phim <b>'.$film->name.'</b> thành công. Click <a href="'.route('admin.film.source', ['id' => $film->id]).'">vào đây</a> để quản lý resource phim']);  
+                            return response()->json(['message' => 'Thêm phim <b>'.$film->name.'</b> thành công. Tải lại trang để có hiệu lực!. Click <a href="'.route('admin.film.source', ['id' => $film->id]).'">vào đây</a> để quản lý resource phim']);  
                         }
                         
                     }
@@ -90,7 +90,7 @@ class AdminController extends Controller
                             }
                         }
                         if($film->save()){
-                            return response()->json(['message' => 'Sửa phim <b>'.$film->name.'</b> thành công. Click <a href="'.route('admin.film.source', ['id' => $film->id]).'">vào đây</a> để quản lý resource phim']);                            
+                            return response()->json(['message' => 'Sửa phim <b>'.$film->name.'</b> thành công. Tải lại trang để có hiệu lực!. Click <a href="'.route('admin.film.source', ['id' => $film->id]).'">vào đây</a> để quản lý resource phim']);                            
                         } else {
                             return response()->json(['message' => 'Có lỗi xảy ra, vui lòng thử lại sau giây lát'], 422);                            
                         }
@@ -111,7 +111,7 @@ class AdminController extends Controller
                 if($request->method() === "POST"){
                     if($film->delete()){
                         $html = "<center><div class='alert alert-success'>
-                        Đã xoá phim <b>$film->name</b> thành công
+                        Đã xoá phim <b>$film->name</b> thành công. Tải lại trang để có hiệu lực!
                         </div>
                         </center>";
                         return view('dialog', ['html' => $html]);
@@ -161,7 +161,7 @@ class AdminController extends Controller
                         $filmDetail->source_vip2 = $request->m22_vip;
                         $filmDetail->source_vip3 = $request->m36_vip;
                         if($filmDetail->save()){
-                            return response()->json(['message' => 'Thêm resource phim thành công!']);                            
+                            return response()->json(['message' => 'Thêm resource phim thành công. Tải lại trang để có hiệu lực!!']);                            
                         } else {
                             return response()->json(['message' => 'Có lỗi xảy ra, xin vui lòng thử lại sau giây lát!'], 422);                            
                         }
@@ -185,7 +185,7 @@ class AdminController extends Controller
                         $filmDetail->source_vip2 = $request->m22_vip;
                         $filmDetail->source_vip3 = $request->m36_vip;
                         if($filmDetail->save()){
-                            return response()->json(['message' => 'Sửa resource phim thành công!']);                            
+                            return response()->json(['message' => 'Sửa resource phim thành công. Tải lại trang để có hiệu lực!!']);                            
                         } else {
                             return response()->json(['message' => 'Có lỗi xảy ra, xin vui lòng thử lại sau giây lát!'], 422);                            
                         }
@@ -199,7 +199,7 @@ class AdminController extends Controller
                 if($request->method() === "POST"){
                     if($filmDetail->delete()){
                         $html = "<center><div class='alert alert-success'>
-                        Đã xoá resource <b>$filmDetail->name</b> thành công
+                        Đã xoá resource <b>$filmDetail->name</b> thành công. Tải lại trang để có hiệu lực!
                         </div>
                         </center>";
                         return view('dialog', ['html' => $html]);
@@ -240,7 +240,7 @@ class AdminController extends Controller
                         $category->type = $request->type === 'on' ? 1 : 2;
                     }
                     if($category->save()){
-                        return response()->json(['message' => 'Thêm thể loại <b>'.$category->name.'</b> thành công!']);                            
+                        return response()->json(['message' => 'Thêm thể loại <b>'.$category->name.'</b> thành công. Tải lại trang để có hiệu lực!!']);                            
                     } else {
                         return response()->json(['message' => 'Có lỗi xảy ra, xin vui lòng thử lại sau giây lát!'], 422);                            
                     }
@@ -263,7 +263,7 @@ class AdminController extends Controller
                         $category->type = $request->type === 1 ? 1 : $request->type;
                     }
                     if($category->save()){
-                        return response()->json(['message' => 'Sửa thể loại <b>'.$category->name.'</b> thành công!']);                            
+                        return response()->json(['message' => 'Sửa thể loại <b>'.$category->name.'</b> thành công. Tải lại trang để có hiệu lực!!']);                            
                     } else {
                         return response()->json(['message' => 'Có lỗi xảy ra, xin vui lòng thử lại sau giây lát!'], 422);                            
                     }
@@ -289,7 +289,7 @@ class AdminController extends Controller
                     }                 
                     if($category->delete()){
                         $html = "<center><div class='alert alert-success'>
-                        Đã xoá phim <b>$category->name</b> thành công
+                        Đã xoá phim <b>$category->name</b> thành công. Tải lại trang để có hiệu lực!
                         </div>
                         </center>";
                         return view('dialog', ['html' => $html]);
@@ -316,6 +316,95 @@ class AdminController extends Controller
     }
     public function user(Request $request, $action = null){
         switch($action){
+            case 'delete':
+                $user = User::findOrFail($request->id);
+                if($request->method() === "POST"){
+                    if($user->right){
+                        $html = "<center><div class='alert alert-danger'>
+                        Thành viên <b>$user->email</b> đang có quyền Quản Trị Viên, vui lòng thử lại
+                        </div>
+                        </center>";
+                        return view('dialog', ['html' => $html]);
+                    }
+                    if($user->delete()){
+                        $html = "<center><div class='alert alert-success'>
+                        Đã xoá thành viên <b>$user->email</b> thành công. Tải lại trang để có hiệu lực!
+                        </div>
+                        </center>";
+                        return view('dialog', ['html' => $html]);
+                    } else {
+                        $html = "<center><div class='alert alert-danger'>
+                        Lỗi khi xoá thành viên <b>$user->email</b>, vui lòng thử lại
+                        </div>
+                        </center>";
+                        return view('dialog', ['html' => $html]);
+                    }
+                }
+                $html = "<center><div class='alert alert-warning'>
+                Xác nhận xoá thành viên <b>$user->email</b>
+                </div>
+                <button class='btn btn-warning' id='confirm-delete-user' data-id='$user->id'>Xác nhận</button>
+                </center>";
+                return view('dialog', ['html' => $html]);
+            break;
+            case 'block':
+                $user = User::findOrFail($request->id);
+                if($request->method() === "POST"){
+                    if($user->right === -1){
+                        $user->right = 0;
+                    } else {
+                        $user->right = -1;
+                    }
+                    if($user->save()){
+                        $html = "<center><div class='alert alert-success'>
+                        Đã ".($user->right === 0 ? 'mở khoá' : 'khoá')." thành viên <b>$user->email</b> thành công. Tải lại trang để có hiệu lực!
+                        </div>
+                        </center>";
+                        return view('dialog', ['html' => $html]);
+                    } else {
+                        $html = "<center><div class='alert alert-danger'>
+                        Lỗi khi ".($user->right === 0 ? 'mở khoá' : 'khoá')." thành viên <b>$user->email</b>, vui lòng thử lại
+                        </div>
+                        </center>";
+                        return view('dialog', ['html' => $html]);
+                    }
+                }
+                $html = "<center><div class='alert alert-warning'>
+                Xác nhận ".($user->right === -1 ? 'mở khoá' : 'khoá')." tài khoản <b>$user->email</b>
+                </div>
+                <button class='btn btn-warning' id='confirm-block-user' data-id='$user->id'>Xác nhận</button>
+                </center>";
+                return view('dialog', ['html' => $html]);
+            break;
+            case 'upgrade':
+                $user = User::findOrFail($request->id);
+                if($request->method() === "POST"){
+                    if($user->right === 1){
+                        $user->right = 0;
+                    } elseif($user->right === 0) {
+                        $user->right = 1;
+                    }
+                    if($user->save()){
+                        $html = "<center><div class='alert alert-success'>
+                        Đã ".($user->right === 1 ? 'nâng quyền' : 'hạ quyền')." thành viên <b>$user->email</b> thành công. Tải lại trang để có hiệu lực!
+                        </div>
+                        </center>";
+                        return view('dialog', ['html' => $html]);
+                    } else {
+                        $html = "<center><div class='alert alert-danger'>
+                        Lỗi khi ".($user->right === 1 ? 'nâng quyền' : 'hạ quyền')." thành viên <b>$user->email</b>, vui lòng thử lại
+                        </div>
+                        </center>";
+                        return view('dialog', ['html' => $html]);
+                    }
+                }
+                $html = "<center><div class='alert alert-warning'>
+                Xác nhận ".($user->right === 0 ? 'nâng quyền' : 'hạ quyền')." tài khoản <b>$user->email</b>
+                </div>
+                <button class='btn btn-warning' id='confirm-upgrade-user' data-id='$user->id'>Xác nhận</button>
+                </center>";
+                return view('dialog', ['html' => $html]);
+            break;
             default:
             $user = User::paginate(10);
             return view('admin.user.index', ['user' => $user]);

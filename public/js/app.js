@@ -464,6 +464,39 @@ $(document).on('click', '#delete-category', function(e) {
         }
     });
 });
+$(document).on('click', '#delete-user', function(e) {
+    var id = $(this).data('id');
+    $.ajax({
+        url: homeUrl + '/admin/user/delete',
+        data: { 'id': id },
+        success: function(res) {
+            $('<div/>').addClass('over').appendTo('body');
+            $('body').append(res);
+        }
+    });
+});
+$(document).on('click', '#block-user', function(e) {
+    var id = $(this).data('id');
+    $.ajax({
+        url: homeUrl + '/admin/user/block',
+        data: { 'id': id },
+        success: function(res) {
+            $('<div/>').addClass('over').appendTo('body');
+            $('body').append(res);
+        }
+    });
+});
+$(document).on('click', '#upgrade-user', function(e) {
+    var id = $(this).data('id');
+    $.ajax({
+        url: homeUrl + '/admin/user/upgrade',
+        data: { 'id': id },
+        success: function(res) {
+            $('<div/>').addClass('over').appendTo('body');
+            $('body').append(res);
+        }
+    });
+});
 $(document).on('click', '#confirm-delete-film', function(e) {
     var id = $(this).data('id');
     var _this = $(this);
@@ -510,9 +543,54 @@ $(document).on('click', '#confirm-delete-category', function(e) {
             $('.over').remove();
             $('<div/>').addClass('over').appendTo('body');
             $('body').append(res);
-        },
-        error: function(err) {
-            console.log(err)
+        }
+    });
+});
+$(document).on('click', '#confirm-delete-user', function(e) {
+    var id = $(this).data('id');
+    var _this = $(this);
+    _this.attr('class', 'btn-loading');
+    $.ajax({
+        url: homeUrl + '/admin/user/delete',
+        type: "POST",
+        data: { 'id': id },
+        success: function(res) {
+            $('.login-dialog').remove();
+            $('.over').remove();
+            $('<div/>').addClass('over').appendTo('body');
+            $('body').append(res);
+        }
+    });
+});
+$(document).on('click', '#confirm-block-user', function(e) {
+    var id = $(this).data('id');
+    var _this = $(this);
+    _this.attr('class', 'btn-loading');
+    $.ajax({
+        url: homeUrl + '/admin/user/block',
+        type: "POST",
+        data: { 'id': id },
+        success: function(res) {
+            $('.login-dialog').remove();
+            $('.over').remove();
+            $('<div/>').addClass('over').appendTo('body');
+            $('body').append(res);
+        }
+    });
+});
+$(document).on('click', '#confirm-upgrade-user', function(e) {
+    var id = $(this).data('id');
+    var _this = $(this);
+    _this.attr('class', 'btn-loading');
+    $.ajax({
+        url: homeUrl + '/admin/user/upgrade',
+        type: "POST",
+        data: { 'id': id },
+        success: function(res) {
+            $('.login-dialog').remove();
+            $('.over').remove();
+            $('<div/>').addClass('over').appendTo('body');
+            $('body').append(res);
         }
     });
 });

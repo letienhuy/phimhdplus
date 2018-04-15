@@ -1066,8 +1066,8 @@ $title_color: rgb(255, 94, 0);
     header {
         .header-logo {
             position: absolute;
-            z-index: 99;
-            left: 46px;
+            width: 200px;
+            left: 0;
         }
         height: 80px;
         .btn-toggle {
@@ -1078,6 +1078,7 @@ $title_color: rgb(255, 94, 0);
             height: 100%;
             position: absolute;
             top: 0;
+            left: 200px;
             max-width: 600px;
         }
     }

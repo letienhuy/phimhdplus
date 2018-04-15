@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="list-film">
-            <h1 class="title">Thêm phim mới</h1>
+            <h1 class="title">THÊM PHIM MỚI</h1>
             <form class="admin-form" enctype="multipart/form-data"  id="add-film-form">
                 <div id="result"></div>
                 <div class="row">

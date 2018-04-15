@@ -6,7 +6,7 @@
         </div>
         <div class="col-md-9 col-sm-8">
             <div class="list-film">
-                <h1 class="title">Quản lý source - {{$film->name}}</h1>
+                <h1 class="title">QUẢN LÝ RESOURCE - {{$film->name}}</h1>
                 <div style="overflow-x: auto;">
                     <table class="admin-table">
                         <tr>

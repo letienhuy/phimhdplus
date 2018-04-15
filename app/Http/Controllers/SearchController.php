@@ -8,7 +8,7 @@ class SearchController extends Controller
 {
     //
     public function index($keys){
-        return $keys;
+        return view('search.index');
     }
     public function tag($keys){
         return $keys;

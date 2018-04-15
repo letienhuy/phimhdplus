@@ -1,7 +1,7 @@
 @extends('master')
 @section('content')
     <div class="container">
-        <h1 class="title">Admin Cpanel</h1>
+        <h1 class="title">ADMIN CPANEL</h1>
         <div class="row">
             <div class="col-md-3 col-sm-4">
                 @include('admin.slide')

@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="list-film">
-            <h1 class="title">Sửa phim - {{$film->name}}</h1>
+            <h1 class="title">SỬA PHIM - {{$film->name}}</h1>
             <form class="admin-form" enctype="multipart/form-data"  id="edit-film-form">
                 <input type="hidden" name="id" value="{{$film->id}}">
                 <div id="result"></div>

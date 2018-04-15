@@ -1,7 +1,7 @@
 @extends('master')
 @section('content')
     <div class="container">
-        <h1 class="title">Quản lý tài khoản</h1>
+        <h1 class="title">QUẢN LÝ TÀI KHOẢN</h1>
         <div class="row">
             <div class="col-md-3 col-sm-4">
                 <div class="list-film">

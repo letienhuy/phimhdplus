@@ -76,7 +76,7 @@
                 @endif
             </div>
             <div class="list-film">
-                <h1 class="title">Bình luận phim</h1>
+                <h1 class="title">BÌNH LUẬN PHIM</h1>
                 <div class="fb-comments" data-href="{{url()->current()}}" data-numposts="10"></div>
             </div>
             <div class="list-film">

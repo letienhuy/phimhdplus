@@ -594,6 +594,9 @@ $(document).on('click', '#confirm-upgrade-user', function(e) {
         }
     });
 });
+$(document).on('click', '.search-box_button_open', function(e) {
+    location.href = homeUrl + '/search/' + $('.search-box_input_show').val();
+});
 
 submitSourceForm('#add-source-form', 'add');
 submitSourceForm('#edit-source-form', 'edit');

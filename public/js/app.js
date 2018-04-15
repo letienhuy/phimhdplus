@@ -304,7 +304,6 @@ $(document).on('click', '#category_parent li', function(e) {
 $(document).on('click', '.dropSelect li', function(e) {
     $(this).children('input')[0].checked = true;
 });
-
 $(document).on('submit', '#add-film-form', function(event) {
     event.preventDefault();
     error.remove();

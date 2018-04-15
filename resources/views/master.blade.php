@@ -58,7 +58,21 @@
         @yield('content')
     </div>
     <footer>
-        Copyright: {{date("Y")}}
+        <ul>
+            <li>
+                <img src="{{asset('css/icons/logo.jpg')}}" alt="LOGO"/>                
+            </li>
+            <li class="footer-inline">
+                <a href="{{url('hoi-dap-huong-dan')}}">Hỏi đáp - Hướng dẫn</a>
+            </li>
+            <li class="footer-inline">
+                <a href="{{url('dieu-khoan-su-dung')}}">Điều khoản sử dụng</a></li>
+            <li class="footer-inline">
+                <a href="#">Liên hệ quảng cáo</a></li>
+            <li>
+                Copyright ©{{date('Y')}} PHIMHD+. All Rights Reserved.
+            </li>
+        </ul>
     </footer>
 </body>
 </html>

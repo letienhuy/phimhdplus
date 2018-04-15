@@ -24,6 +24,12 @@ Route::get('/logout', function(){
 Route::get('/phim-bo-moi-nhat', 'HomeController@phimBo')->name('phimbo');
 Route::get('/phim-le-moi-nhat', 'HomeController@phimLe')->name('phimle');
 Route::get('/phim-moi-nhat', 'HomeController@phimMoi')->name('phimmoi');
+Route::get('/hoi-dap-huong-dan', function(){
+    return view('home.hoidap');
+});
+Route::get('/dieu-khoan-su-dung', function(){
+    return view('home.dieukhoan');
+});
 Route::get('/the-loai/{id}-{uri}', 'DetailController@category')->name('category');
 Route::get('/phim/{id}-{uri}', 'DetailController@detail')->name('film');
 Route::get('/phim/{id}-{uri}/view', 'DetailController@viewFilm')->name('film.view');

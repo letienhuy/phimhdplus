@@ -144,8 +144,30 @@ $title_color: rgb(255, 94, 0);
     }
     footer {
         background: $primary_color;
-        height: 50px;
         width: 100%;
+        height: auto;
+        ul {
+            padding: 0;
+            text-align: center;
+            li {
+                list-style: none;
+                line-height: 30px;
+                img {
+                    width: 100px;
+                    height: 30px;
+                }
+                a {
+                    color: $fifth_color;
+                    &:hover {
+                        color: $fourth_color;
+                    }
+                }
+            }
+            li.footer-inline {
+                display: inline-block;
+                margin: 5px;
+            }
+        }
     }
     .ads {
         width: 100%;
@@ -1082,9 +1104,7 @@ $title_color: rgb(255, 94, 0);
             max-width: 600px;
         }
     }
-    footer {
-        height: 100px;
-    }
+    footer {}
     #content {
         padding-top: 90px;
         padding-bottom: 10px;

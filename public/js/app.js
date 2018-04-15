@@ -594,8 +594,12 @@ $(document).on('click', '#confirm-upgrade-user', function(e) {
         }
     });
 });
+$(document).on('keypress', '.search-box_input', function(e) {
+    if (e.keyCode == 13)
+        location.href = homeUrl + '/search/?keys=' + encodeURIComponent($('.search-box_input_show').val()).replace(/%20/g, '+');
+});
 $(document).on('click', '.search-box_button_open', function(e) {
-    location.href = homeUrl + '/search/' + $('.search-box_input_show').val();
+    location.href = homeUrl + '/search/?keys=' + encodeURIComponent($('.search-box_input_show').val()).replace(/%20/g, '+');
 });
 
 submitSourceForm('#add-source-form', 'add');

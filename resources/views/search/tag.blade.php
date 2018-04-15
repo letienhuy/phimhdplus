@@ -1,27 +1,19 @@
 @extends('master')
 @section('content')
     <div class="container">
-        <h1 class="title">TÌM KIẾM NÂNG CAO</h1>
         <div class="row">
             <div class="col-md-3 col-sm-4">
                 <div class="list-film">
-                    <div class="admin-form">
-                        <form>
-                            <input type="text" name="keys" placeholder="Nhập tên phim, diễn viên, đạo diễn...">
-                            <button class="button">Tìm kiếm</button>
-                        </form>
-                    </div>
+                    <h1 class="title">TAGS PHỔ BIẾN</h1>
+                    @foreach ($tags as $item)
+                        {!! Help::tags($item) !!},
+                    @endforeach
                 </div>
             </div>
             <div class="col-md-9 col-sm-8">
                 <div class="list-film">
                     @if ($film)
-                        <h1 class="title">KẾT QUẢ TÌM KIẾM</h1>
-                        <table class="admin-table">
-                            <tr>
-                                <td>Tìm thấy {{count($film)}} kết quả với từ khoá "<b>{{$keys}}</b>"</td>
-                            </tr>
-                        </table>
+                        <h1 class="title">TAGS: {{$key}}</h1>
                         <div class="row">
                             @foreach ($film as $item)
                             <div class="col-md-3 col-sm-4 col-xs-6">

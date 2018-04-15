@@ -22,7 +22,7 @@
     <script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
     <script src="{{asset('js/swiper.min.js')}}"></script>
-    <script src="{{asset('js/app.js')}}"></script>
+    <script src="{{asset('js/app.min.js')}}"></script>
     <title>{{$title ?? $setting->title}}</title>
 </head>
 <body id="root">

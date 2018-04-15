@@ -7,11 +7,6 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': csrfToken
     }
 });
-$(window).resize(function() {
-    setTimeout(function() {
-        location.reload();
-    }, 1000);
-});
 $(document).ready(function() {
     $('.film-name').tooltip();
     $('.btn-toggle').click(function() {

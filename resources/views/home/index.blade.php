@@ -151,8 +151,16 @@
         });
         var width = window.innerWidth;
         var newFilm = new Swiper('.list-film .swiper-container', {
-            slidesPerView: width <= 480 ? 2 : width > 480 && width <= 1024 ? 3 : 4,
-            slidesPerColumn: 2
+            slidesPerView: 4,
+            slidesPerColumn: 2,
+            breakpoints: {
+                480: {
+                    slidesPerView: 2
+                },
+                1024: {
+                    slidesPerView: 3
+                }
+            }
         });
     </script>
     @endsection

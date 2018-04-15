@@ -101,6 +101,9 @@ class HomeController extends Controller
                 return response()->json(['message' => 'Email này không tồn tại!'], 422);
             } else {
                 if(Hash::check($request->password, $user->password)){
+                    if($user->right === -1){
+                        return response()->json(['message' => 'Tài khoản này hiện đang bị khoá, vui lòng liên hệ hỗ trợ để giải quyết!'], 422);                
+                    }
                     Auth::login($user, true);
                     return response()->json([
                         'message' => 'Đăng nhập thành công, hệ thống đang tự động chuyển hướng, vui lòng đợi trong giây lát!',

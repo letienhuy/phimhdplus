@@ -1,6 +1,6 @@
 ﻿var homeUrl = $('base').attr('href');
-var error = $('<div/>').addClass('alert alert-danger');
-var success = $('<div/>').addClass('alert alert-success');
+var error = $('<div/>').addClass('alert alert-danger center');
+var success = $('<div/>').addClass('alert alert-success center');
 var csrfToken = $('meta[name="csrf-token"]').attr('content');
 $.ajaxSetup({
     headers: {

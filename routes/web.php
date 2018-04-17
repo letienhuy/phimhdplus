@@ -42,7 +42,7 @@ Route::group(['prefix' => 'ajax'], function(){
     Route::get('/download/{id}', 'DetailController@getDownload');
     Route::any('/report/{id}', 'DetailController@report');
     Route::any('/like/{id}', 'DetailController@like')->middleware('auth');
-    Route::any('/like/{id}', 'DetailController@like')->middleware('auth');
+    Route::any('/vote/{id}', 'DetailController@vote')->middleware('auth');
     Route::get('/upgrade', 'UserController@upgradeAjax')->middleware('auth');
 });
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){

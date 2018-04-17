@@ -13,4 +13,7 @@ class Film extends Model
     public function vote(){
         return $this->hasMany('App\Vote', 'film_id', 'id');
     }
+    public function like(){
+        return $this->hasMany('App\Like', 'film_id', 'id');
+    }
 }

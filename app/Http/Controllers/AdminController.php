@@ -8,6 +8,8 @@ use App\Category;
 use App\FilmDetail;
 use App\Report;
 use App\User;
+use App\Vote;
+use App\Like;
 class AdminController extends Controller
 {
     //
@@ -109,19 +111,14 @@ class AdminController extends Controller
                     return view('dialog', ['html' => $html]);
                 }
                 if($request->method() === "POST"){
-                    if($film->delete()){
-                        $html = "<center><div class='alert alert-success'>
-                        Đã xoá phim <b>$film->name</b> thành công. Tải lại trang để có hiệu lực!
-                        </div>
-                        </center>";
-                        return view('dialog', ['html' => $html]);
-                    } else {
-                        $html = "<center><div class='alert alert-danger'>
-                        Lỗi khi xoá phim <b>$film->name</b>, vui lòng thử lại
-                        </div>
-                        </center>";
-                        return view('dialog', ['html' => $html]);
-                    }
+                    Vote::where('film_id', $request->id)->delete();
+                    Like::where('film_id', $request->id)->delete();
+                    $film->delete();
+                    $html = "<center><div class='alert alert-success'>
+                    Đã xoá phim <b>$film->name</b> thành công. Tải lại trang để có hiệu lực!
+                    </div>
+                    </center>";
+                    return view('dialog', ['html' => $html]);
                 } else {
                     $html = "<center><div class='alert alert-warning'>
                     Xác nhận xoá phim <b>$film->name</b>

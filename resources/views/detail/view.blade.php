@@ -115,4 +115,10 @@
             @include('slide_right')
         </div>
     </div>
+    <script>
+        jwplayer().on('error', function(){
+            $('<div/>').addClass('over').appendTo('body');
+            $('body').append('<div class="login-dialog"><span class="closex"></span><div class="alert alert-danger center" style="font-size: 16px;">Có lỗi xảy ra, có thể do mạng yếu hoặc tập phim không tồn tại. Hãy thử F5 lại trang web!</div></div>');
+        });
+    </script>
 @endsection

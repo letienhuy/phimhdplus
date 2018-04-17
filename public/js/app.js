@@ -35,6 +35,7 @@ $(document).ready(function() {
         $('.slide-collapse').toggle("scale");
     });
 });
+
 $(document).on('submit', '#login-form', function(event) {
     event.preventDefault();
     error.remove();

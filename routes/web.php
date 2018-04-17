@@ -48,7 +48,7 @@ Route::group(['prefix' => 'ajax'], function(){
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
     Route::get('/', 'AdminController@index')->name('admin');
     Route::any('/film/{action?}', 'AdminController@film')->name('admin.film');
-    Route::any('/film/source/{id}/{action?}', 'AdminController@filmSource')->name('admin.film.source');
+    Route::any('/film/source/{id}/{action?}/{filmDefail?}', 'AdminController@filmSource')->name('admin.film.source');
     Route::any('/category/{action?}', 'AdminController@category')->name('admin.category');
     Route::any('/user/{action?}', 'AdminController@user')->name('admin.user');
 });

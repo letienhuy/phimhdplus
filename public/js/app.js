@@ -439,8 +439,9 @@ $(document).on('click', '#delete-film', function(e) {
 });
 $(document).on('click', '#delete-source', function(e) {
     var id = $(this).data('id');
+    var filmId = $(this).data('film-id');
     $.ajax({
-        url: homeUrl + '/admin/film/source/' + id + '/delete',
+        url: homeUrl + '/admin/film/source/' + filmId + '/delete/' + id,
         success: function(res) {
             $('<div/>').addClass('over').appendTo('body');
             $('body').append(res);
@@ -510,10 +511,11 @@ $(document).on('click', '#confirm-delete-film', function(e) {
 
 $(document).on('click', '#confirm-delete-resource', function(e) {
     var id = $(this).data('id');
+    var filmId = $(this).data('film-id');
     var _this = $(this);
     _this.attr('class', 'btn-loading');
     $.ajax({
-        url: homeUrl + '/admin/film/source/' + id + '/delete',
+        url: homeUrl + '/admin/film/source/' + filmId + '/delete/' + id,
         type: "POST",
         success: function(res) {
             $('.login-dialog').remove();
@@ -596,37 +598,60 @@ $(document).on('click', '.search-box_button_open', function(e) {
     location.href = homeUrl + '/search/?keys=' + encodeURIComponent($('.search-box_input_show').val()).replace(/%20/g, '+');
 });
 
-submitSourceForm('#add-source-form', 'add');
-submitSourceForm('#edit-source-form', 'edit');
 
-function submitSourceForm(element, action) {
-    $(document).on('submit', element, function(event) {
-        var id = $(this).data('id');
-        event.preventDefault();
-        error.remove();
-        var btn = $(this).children().find('.button');
-        var data = new FormData(this);
-        btn.attr('class', 'btn-loading');
-        $.ajax({
-            url: homeUrl + '/admin/film/source/' + id + '/' + action,
-            data: data,
-            contentType: false,
-            cache: false,
-            processData: false,
-            type: 'POST',
-            success: function(res) {
-                btn.attr('class', 'button');
-                $('<div/>').addClass('over').appendTo('body');
-                $('body').append('<div class="login-dialog"><span class="closex"></span><div class="alert alert-success">' + res.message + '</div></div>');
-                $(element)[0].reset();
-            },
-            error: function(err) {
-                btn.attr('class', 'button');
-                error.text(err.responseJSON.message).appendTo('#result');
-            }
-        });
+$(document).on('submit', '#add-source-form', function(event) {
+    var filmId = $(this).data('film-id');
+    event.preventDefault();
+    error.remove();
+    var btn = $(this).children().find('.button');
+    var data = new FormData(this);
+    btn.attr('class', 'btn-loading');
+    $.ajax({
+        url: homeUrl + '/admin/film/source/' + filmId + '/add',
+        data: data,
+        contentType: false,
+        cache: false,
+        processData: false,
+        type: 'POST',
+        success: function(res) {
+            btn.attr('class', 'button');
+            $('<div/>').addClass('over').appendTo('body');
+            $('body').append('<div class="login-dialog"><span class="closex"></span><div class="alert alert-success">' + res.message + '</div></div>');
+            $('#add-source-form')[0].reset();
+        },
+        error: function(err) {
+            btn.attr('class', 'button');
+            error.text(err.responseJSON.message).appendTo('#result');
+        }
     });
-}
+});
+$(document).on('submit', '#edit-source-form', function(event) {
+    var filmId = $(this).data('film-id');
+    var id = $(this).data('id');
+    event.preventDefault();
+    error.remove();
+    var btn = $(this).children().find('.button');
+    var data = new FormData(this);
+    btn.attr('class', 'btn-loading');
+    $.ajax({
+        url: homeUrl + '/admin/film/source/' + filmId + '/edit/' + id,
+        data: data,
+        contentType: false,
+        cache: false,
+        processData: false,
+        type: 'POST',
+        success: function(res) {
+            btn.attr('class', 'button');
+            $('<div/>').addClass('over').appendTo('body');
+            $('body').append('<div class="login-dialog"><span class="closex"></span><div class="alert alert-success">' + res.message + '</div></div>');
+            $('#edit-source-form')[0].reset();
+        },
+        error: function(err) {
+            btn.attr('class', 'button');
+            error.text(err.responseJSON.message).appendTo('#result');
+        }
+    });
+});
 //play function
 function play(source, poster, title) {
     $('#player').children().remove();

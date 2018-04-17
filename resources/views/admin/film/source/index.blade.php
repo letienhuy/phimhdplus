@@ -31,10 +31,10 @@
                             <td>{{$item->source_vip2}}</td>
                             <td>{{$item->source_vip3}}</td>
                             <td>
-                                <a href="{{route('admin.film.source', ['action' => 'edit', 'id' => $item->id])}}">
+                                <a href="{{route('admin.film.source', ['action' => 'edit', 'id' => $film->id, 'filmDetail' => $item->id])}}">
                                     <button class="btn btn-success">Sửa</button>
                                 </a>
-                                <a id="delete-source" data-id="{{$item->id}}">
+                                <a id="delete-source" data-film-detail="{{$film->id}}" data-id="{{$item->id}}">
                                     <button class="btn btn-danger">Xoá</button>
                                 </a>
                             </td>

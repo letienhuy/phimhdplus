@@ -140,7 +140,7 @@ class AdminController extends Controller
                 return view('admin.film.index', ['film' => $film]);
         }
     }
-    public function filmSource(Request $request, $id, $action = null){
+    public function filmSource(Request $request, $id, $action = null, $filmDetail = null){
         switch($action){
             case 'add':
                 $film = Film::findOrFail($id);
@@ -171,7 +171,7 @@ class AdminController extends Controller
                 }   
             break;
             case 'edit':
-                $filmDetail = FilmDetail::findOrFail($id);
+                $filmDetail = FilmDetail::findOrFail($filmDetail);
                 if($request->method() === "POST"){
                     if(empty($request->name) || empty($request->m18) || empty($request->m22) || empty($request->m36) || empty($request->m18_vip) || empty($request->m22_vip) || empty($request->m36_vip)){
                         return response()->json(['message' => 'Xin vui lòng nhập đầy đủ thông tin resource phim'], 422);
@@ -195,7 +195,7 @@ class AdminController extends Controller
                 }   
             break;
             case 'delete':
-                $filmDetail = FilmDetail::findOrFail($id);
+                $filmDetail = FilmDetail::findOrFail($filmDetail);
                 if($request->method() === "POST"){
                     if($filmDetail->delete()){
                         $html = "<center><div class='alert alert-success'>
@@ -220,7 +220,7 @@ class AdminController extends Controller
                 }
             break;
             default:
-                $film = Film::findOrFail($request->id);
+                $film = Film::findOrFail($id);
                 return view('admin.film.source.index', ['film' => $film, 'filmDetail' => $film->filmDetail()->paginate(20)]);
         }
     }

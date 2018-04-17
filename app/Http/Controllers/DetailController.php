@@ -152,16 +152,16 @@ class DetailController extends Controller
         $filmDetail = FilmDetail::findOrFail($filmDetailId);
         $data = array();
         $data['source'] = [
-            'm18' => $filmDetail['source1'],
-            'm22' => $filmDetail['source2'],
-            'm36' => $filmDetail['source3'],
+            'm18' => $filmDetail->source1,
+            'm22' => $filmDetail->source2,
+            'm36' => $filmDetail->source3,
         ];
         if(Auth::check()){
             if(Auth::user()->vip){
                 $data['source'] = [
-                    'm18' => $filmDetail['source_vip1'],
-                    'm22' => $filmDetail['source_vip2'],
-                    'm36' => $filmDetail['source_vip3'],
+                    'm18' => $filmDetail->source_vip1,
+                    'm22' => $filmDetail->source_vip2,
+                    'm36' => $filmDetail->source_vip3,
                 ];
             }
         }

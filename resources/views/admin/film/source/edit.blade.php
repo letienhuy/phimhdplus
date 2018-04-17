@@ -3,7 +3,7 @@
     <div class="container">
         <div class="list-film">
             <h1 class="title">SỬA RESOURCE - {{$filmDetail->name}}</h1>
-            <form class="admin-form" enctype="multipart/form-data"  id="edit-source-form" data-id="{{$filmDetail->id}}">
+            <form class="admin-form" enctype="multipart/form-data"  id="edit-source-form" data-film-id="{{$filmDetail->film->id}}" data-id="{{$filmDetail->id}}">
                 <div id="result"></div>
                 <div class="row">
                     <div class="col-md-6 col-sm-6">

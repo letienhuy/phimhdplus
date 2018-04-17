@@ -19,7 +19,7 @@
                             <tr class="parent">
                                 <td>{{$item->id}}</td>
                                 <td>{{$item->name}}</td>
-                                <td>{{$item->type === 1 ? 'Nhiều tập' : 'Một tập'}}</td>
+                                <td>{{$item->type === 2 ? 'Nhiều tập' : 'Một tập'}}</td>
                                 <td>
                                     <a href="{{route('admin.category', ['action' => 'edit', 'id' => $item->id])}}">
                                         <button class="btn btn-success">Sửa</button>

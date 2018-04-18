@@ -14,7 +14,7 @@ class DetailController extends Controller
 {
     public function category($id){
         $category = Category::findOrFail($id);
-        $film = Film::where([['category', 'like', '%'.$category->id.'%'], ['disable', 0]])->paginate(24);
+        $film = Film::where([['category', 'like', '%'.$category->id.'%'], ['disable', 0], ['type', $category->type]])->paginate(24);
         return view('detail.category', ['category' => $category, 'film' => $film]);
     }
     public function detail($id){

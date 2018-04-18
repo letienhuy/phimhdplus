@@ -1,4 +1,8 @@
 <div class="ads hidden-xs">
+    <img src="{{asset('css/icons/qc1.jpg')}}" alt="">
+</div>
+<div class="ads hidden-xs">
+    <img src="{{asset('css/icons/qc2.png')}}" alt="">
 </div>
 <div class="list-film">
     <h1 class="title">TOP PHIM - PHIMHD+</h1>

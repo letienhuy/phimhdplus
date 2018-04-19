@@ -11,7 +11,7 @@
                     @foreach ($slide as $item)
                         <div class="swiper-slide">
                             <a href="{{route('film', ['uri' => Help::beauty($item->name), 'id' => $item->id])}}" title="{{$item->name}}">
-                            <div class="thumb" style="background-image: url({{$item->poster}});"></div>
+                                <img src="{{$item->poster}}" alt="" class="thumb">
                             </a>
                         </div>
                     @endforeach

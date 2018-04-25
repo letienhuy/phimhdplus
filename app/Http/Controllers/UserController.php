@@ -73,6 +73,21 @@ class UserController extends Controller
         }
         return view('user.upgrade');
     }
+    public function recharge(Request $request){
+        if($request->method() === "POST"){
+            if(empty($request->type_card)){
+                return response()->json(['message' => 'Vui lòng chọn loại thẻ nạp!'], 422);
+            }
+            if(empty($request->pin)){
+                return response()->json(['message' => 'Vui lòng nhập mã PIN in sau thẻ cào!'], 422);
+            }
+            if(empty($request->seri)){
+                return response()->json(['message' => 'Vui lòng nhập số seri!'], 422);
+            }
+            return response()->json(['message' => 'Telco đang bảo trì kênh nạp, vui lòng thử lại sau!'], 422);
+        }
+        return view('user.recharge');
+    }
     public function upgradeAjax(Request $request){
         $html = '<div class="alert alert-success">Nâng cấp tài khoản VIP. Chỉ với ';
         $html .= '<span style="color:red; font-weight: bold;">'.Setting::find(1)->vip.' Credit</span> tài khoản của bạn sẽ được 

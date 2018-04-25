@@ -403,6 +403,29 @@ $(document).on('submit', '#edit-category-form', function(event) {
         }
     });
 });
+$(document).on('submit', '#recharge-form', function(event) {
+    event.preventDefault();
+    error.remove();
+    var btn = $(this).children('.button');
+    var data = new FormData(this);
+    btn.attr('class', 'btn-loading');
+    $.ajax({
+        url: homeUrl + '/user/recharge',
+        data: data,
+        contentType: false,
+        cache: false,
+        processData: false,
+        type: 'POST',
+        success: function(res) {
+            btn.attr('class', 'button');
+            error.text(res.success).appendTo('#result');
+        },
+        error: function(err) {
+            btn.attr('class', 'button');
+            error.text(err.responseJSON.message).appendTo('#result');
+        }
+    });
+});
 $(document).on('click', '#upgrade-button', function(e) {
     $.ajax({
         url: homeUrl + '/ajax/upgrade',

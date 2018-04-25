@@ -19,7 +19,7 @@
                         @if(!Auth::user()->vip)
                             <li><a href="{{route('user.upgrade')}}" style="color: red; font-weight: bold;">Nâng cấp VIP</a></li>
                         @endif
-                        <li>Nạp Credit</li>
+                        <li><a href="{{route('user.recharge')}}">Nạp Credit</a></li>
                         <li>Yêu cầu post phim</li>
                     </ul>
                 </div>

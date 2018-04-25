@@ -23,7 +23,7 @@
         @endif
             <span><a href="{{route('user')}}">Quản lý tài khoản</a></span>
             <span style="color:red">Credit: {{number_format(Auth::user()->credit)}}</span>
-            <span><a href="">Nạp Credit</a></span>
+            <span><a href="{{route('user.recharge')}}">Nạp Credit</a></span>
             @if (!Auth::user()->vip)
                 <span><a href="{{route('user.upgrade')}}">Nâng cấp VIP</a></span>                
             @endif

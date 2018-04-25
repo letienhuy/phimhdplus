@@ -813,6 +813,10 @@ $title_color: rgb(255, 94, 0);
                 min-height: 100px;
                 color: #000000;
             }
+            select {
+                color: #000000;
+                width: 100%;
+            }
         }
         .login-choose {
             color: #555;

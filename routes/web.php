@@ -57,4 +57,5 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function(){
     Route::any('/change-password', 'UserController@changePassword')->name('user.pass');
     Route::any('/change-avatar', 'UserController@changeAvatar')->name('user.avatar');
     Route::any('/upgrade', 'UserController@upgrade')->name('user.upgrade');
+    Route::any('/recharge', 'UserController@recharge')->name('user.recharge');
 });

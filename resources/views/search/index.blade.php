@@ -19,7 +19,7 @@
                         <h1 class="title">KẾT QUẢ TÌM KIẾM</h1>
                         <table class="admin-table">
                             <tr>
-                                <td>Tìm thấy {{count($film)}} kết quả với từ khoá "<b>{{$keys}}</b>"</td>
+                                <td>Tìm thấy {{sizeof($film)}} kết quả với từ khoá "<b>{{$keys}}</b>"</td>
                             </tr>
                         </table>
                         <div class="row">

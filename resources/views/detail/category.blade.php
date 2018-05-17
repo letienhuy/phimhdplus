@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="list-film">
-                <h1 class="title" style="text-transform: uppercase">THỂ LOẠI: {{count($category->parent) > 0 ? $category->parent->name.' - ' : ""}}{{$category->name}}</h1>
+                <h1 class="title" style="text-transform: uppercase">THỂ LOẠI: {{sizeof($category->parent) > 0 ? $category->parent->name.' - ' : ""}}{{$category->name}}</h1>
                 <div class="row">
                     @foreach ($film as $item)
                     <div class="col-md-3 col-sm-4 col-xs-6">
@@ -40,7 +40,7 @@
                     </div>
                     @endforeach
                 </div>
-                    @if (count($film) === 0)
+                    @if (sizeof($film) === 0)
                         <table class="admin-table">
                             <tr>
                                 <td>

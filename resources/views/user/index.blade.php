@@ -86,7 +86,7 @@
                                 </td>
                             </tr>
                         @endforeach
-                        @if (count($like) === 0)
+                        @if (sizeof($like) === 0)
                             <tr>
                                 <td colspan="4">Danh sách yêu thích đang trống, <a href="{{route('home')}}">Xem phim ngay</a>!</td>
                             </tr>
@@ -117,7 +117,7 @@
                                 </td>
                             </tr>
                         @endforeach
-                        @if (count($vote) === 0)
+                        @if (sizeof($vote) === 0)
                             <tr>
                                 <td colspan="4">Danh sách đánh giá phim đang trống, <a href="{{route('home')}}">Xem phim ngay</a>!</td>
                             </tr>

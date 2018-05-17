@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="col-md-9 col-sm-8">
-            @if (count($film->filmDetail) === 0)
+            @if (sizeof($film->filmDetail) === 0)
                 <div id="player">
                     <script>
                         play('','');
@@ -35,7 +35,7 @@
                     {{$film->name}}
                 </h1>
                 @if (Auth::check())
-                    @if (count(Auth::user()->vote()->where('film_id', $film->id)->get()) === 0)
+                    @if (sizeof(Auth::user()->vote()->where('film_id', $film->id)->get()) === 0)
                         <div class="film-vote">
                             <span>ĐÁNH GIÁ PHIM</span>
                             <span>
@@ -99,7 +99,7 @@
                     </div>
                     @endforeach
                 </div>
-                    @if (count($film) === 0)
+                    @if (sizeof($film) === 0)
                         <table class="admin-table">
                             <tr>
                                 <td>

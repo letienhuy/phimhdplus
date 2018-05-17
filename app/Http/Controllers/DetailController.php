@@ -111,10 +111,10 @@ class DetailController extends Controller
             $userVote->film_id = $film->id;
             $userVote->user_id = Auth::id();
             $userVote->point = $request->point;
-            if(count($filmVote) === 0){
+            if(sizeof($filmVote) === 0){
                 $total_point = $request->point;
             } else {
-                $total_point = round(($filmVote->sum('point') + $request->point) / (count($filmVote) + 1));                
+                $total_point = round(($filmVote->sum('point') + $request->point) / (sizeof($filmVote) + 1));                
             }
             $film->total_vote = $total_point;
             $film->save();

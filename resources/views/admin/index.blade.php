@@ -39,7 +39,7 @@
                                 </td>
                             </tr>
                         @endforeach
-                        @if (count($film) === 0)
+                        @if (sizeof($film) === 0)
                             <tr>
                                 <td colspan="4">Chưa có phim nào!</td>
                             </tr>
@@ -51,12 +51,12 @@
                 <div class="list-film">
                         <h1 class="title">THỐNG KÊ</h1>
                         <div class="film-detail">
-                            <span>Tổng số phim: <b>{{count(App\Film::all())}}</b></span>
-                            <span>Đang hiển thị: <b>{{count(App\Film::where('disable', 0)->get())}}</b></span>
-                            <span>Đang bị ẩn: <b>{{count(App\Film::where('disable', 1)->get())}}</b></span>
-                            <span>Tổng số thành viên: <b>{{count(App\User::all())}}</b></span>
-                            <span>Thành viên VIP: <b>{{count(App\User::where('vip', 1)->get())}}</b></span>
-                            <span>Thành viên thường: <b>{{count(App\User::where('vip', 0)->get())}}</b></span>
+                            <span>Tổng số phim: <b>{{sizeof(App\Film::all())}}</b></span>
+                            <span>Đang hiển thị: <b>{{sizeof(App\Film::where('disable', 0)->get())}}</b></span>
+                            <span>Đang bị ẩn: <b>{{sizeof(App\Film::where('disable', 1)->get())}}</b></span>
+                            <span>Tổng số thành viên: <b>{{sizeof(App\User::all())}}</b></span>
+                            <span>Thành viên VIP: <b>{{sizeof(App\User::where('vip', 1)->get())}}</b></span>
+                            <span>Thành viên thường: <b>{{sizeof(App\User::where('vip', 0)->get())}}</b></span>
                         </div>
                     </div>
             </div>

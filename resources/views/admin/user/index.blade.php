@@ -49,7 +49,7 @@
                                 @endif
                             </td>
                         </tr>
-                        @endforeach @if (count($user) === 0)
+                        @endforeach @if (sizeof($user) === 0)
                         <tr>
                             <td colspan="5">Chưa có người dùng nào!</td>
                         </tr>

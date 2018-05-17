@@ -39,14 +39,14 @@
                                 </a>
                             </td>
                         </tr>
-                        @endforeach @if (count($film->filmDetail) === 0)
+                        @endforeach @if (sizeof($film->filmDetail) === 0)
                         <tr>
                             <td colspan="9">Chưa có resource cho phim này!</td>
                         </tr>
                         @endif
                     </table>
                 </div>
-                {{$filmDetail->links()}} @if (count($filmDetail)
+                {{$filmDetail->links()}} @if (sizeof($filmDetail)
                 < $film->episode)
                     <a href="{{route('admin.film.source', ['action' => 'add', 'id' => $film->id])}}">
                         <button class="btn btn-success">Thêm resource phim</button>

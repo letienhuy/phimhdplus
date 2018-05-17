@@ -27,7 +27,7 @@
                             DOWNLOAD
                         </button>
                         </a>
-                        @if (count(App\Like::where([['user_id', Auth::id()], ['film_id', $film->id]])->get()) === 0)
+                        @if (sizeof(App\Like::where([['user_id', Auth::id()], ['film_id', $film->id]])->get()) === 0)
                             <button id="like-button" data-id="{{$film->id}}" class="btn btn-inline btn-primary">
                                 <i class="fa fa-heart"></i>
                                 <span>Yêu thích</span>
@@ -41,7 +41,7 @@
                     @endif
                     <span>Đánh giá:
                         <span class="star-point">{{$film->total_vote}}</span>
-                        <i class="fa fa-star" style="color: #ED8A19"></i> ({{count($film->vote)}} votes)</span>           
+                        <i class="fa fa-star" style="color: #ED8A19"></i> ({{sizeof($film->vote)}} votes)</span>           
                     <span>Lượt xem: {{$film->view}}</span>
                     <span>Đạo  diễn: {{$film->director}}</span>
                     <span>Diễn viên: {!! Help::actorTags($film) !!}</span>
@@ -79,7 +79,7 @@
                     </div>
                     @endforeach
                 </div>
-                    @if (count($film) === 0)
+                    @if (sizeof($film) === 0)
                         <table class="admin-table">
                             <tr>
                                 <td>

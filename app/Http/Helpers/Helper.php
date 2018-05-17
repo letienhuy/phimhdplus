@@ -47,7 +47,7 @@ class Helper{
         foreach($categories as $category){
             $html .= "<li>";
             $html .= '<a href="'.route('category', ['uri' => self::beauty($category->name), 'id' => $category->id]).'">'.$category->name.'</a>';
-            if(count($category->child) > 0 && $parentId === 0){
+            if(sizeof($category->child) > 0 && $parentId === 0){
                 $html .= '<ul class="collapse">';
                 $html .= self::slideCategories($category->id);
                 $html .= "</ul>";

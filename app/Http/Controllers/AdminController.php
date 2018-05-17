@@ -106,7 +106,7 @@ class AdminController extends Controller
             break;
             case 'delete':
                 $film = Film::findOrFail($request->id);
-                if(count($film->filmDetail) > 0){
+                if(sizeof($film->filmDetail) > 0){
                     $html = "<center><div class='alert alert-danger'>Rescource phim đang tồn tại!  Vui lòng xoá resource của phim <b>$film->name</b> trước khi xoá phim này.</div></center>";
                     return view('dialog', ['html' => $html]);
                 }
@@ -141,8 +141,8 @@ class AdminController extends Controller
         switch($action){
             case 'add':
                 $film = Film::findOrFail($id);
-                if(count($film->filmDetail) >= $film->episode){
-                    return response()->json(['message' => 'Phim chỉ có '.count($film->filmDetail).' tập, không thể thêm resource'], 422);
+                if(sizeof($film->filmDetail) >= $film->episode){
+                    return response()->json(['message' => 'Phim chỉ có '.sizeof($film->filmDetail).' tập, không thể thêm resource'], 422);
                 }
                 if($request->method() === "POST"){
                     if(empty($request->name) || empty($request->m18) || empty($request->m22) || empty($request->m36) || empty($request->m18_vip) || empty($request->m22_vip) || empty($request->m36_vip)){
@@ -271,7 +271,7 @@ class AdminController extends Controller
             break;
             case 'delete':
                 $category = Category::findOrFail($request->id);
-                if(count($category->child) > 0){
+                if(sizeof($category->child) > 0){
                     $html = "<center><div class='alert alert-danger'>Thể loại này đang chứ thể loại con, vui lòng xoá thể loại con trước khi xoá thể loại này.</div></center>";
                     return view('dialog', ['html' => $html]);
                 }
@@ -280,7 +280,7 @@ class AdminController extends Controller
                     foreach($film as $item){
                         $cat = json_decode($item->category, true);
                         unset($cat[array_search($category->id, $cat)]);
-                        $item->disable = count($cat) === 0 ? 1 : 0;
+                        $item->disable = sizeof($cat) === 0 ? 1 : 0;
                         $item->category = json_encode($cat);
                         $item->save();
                     }                 

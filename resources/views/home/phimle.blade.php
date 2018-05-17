@@ -40,7 +40,7 @@
                     </div>
                     @endforeach
                 </div>
-                    @if (count($filmLe) === 0)
+                    @if (sizeof($filmLe) === 0)
                         <table class="admin-table">
                             <tr>
                                 <td>

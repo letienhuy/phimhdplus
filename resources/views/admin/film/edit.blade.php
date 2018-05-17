@@ -18,13 +18,13 @@
                     <div class="col-md-4 col-sm-4">
                         <label for="">Mô tả ngắn:</label>
                         <textarea name="about">{{$film->about}}</textarea>
-                        <label for="">Danh mục: {{count($parent) === 0 ? '(Phim này chưa có danh mục)':''}}</label>
+                        <label for="">Danh mục: {{sizeof($parent) === 0 ? '(Phim này chưa có danh mục)':''}}</label>
                         <div class="multiSelect">
                                 <span>Chọn danh mục...</span>
                                 <ul class="dropSelect" id="category_parent">
                                     @foreach ($categoryParent as $item)
                                         <li>
-                                            <input type="radio" name="category_parent" value="{{$item->id}}" {{count($parent) > 0 && $item->id == $parent->id ? "checked" : ""}}> {{$item->name}}
+                                            <input type="radio" name="category_parent" value="{{$item->id}}" {{sizeof($parent) > 0 && $item->id == $parent->id ? "checked" : ""}}> {{$item->name}}
                                         </li>
                                     @endforeach
                                 </ul>
@@ -33,7 +33,7 @@
                         <div class="multiSelect">
                             <span>Chọn nhiều...</span>
                             <ul class="dropSelect" id="dropSelect">
-                                @if (count($parent) > 0)
+                                @if (sizeof($parent) > 0)
                                     @foreach ($parent->child as $item)
                                     <li>
                                         <input type="checkbox" name="category[]" value="{{$item->id}}" {{in_array($item->id, $categories) ? "checked" : ""}}> {{$item->name}}

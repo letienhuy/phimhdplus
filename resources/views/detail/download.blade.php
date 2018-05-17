@@ -20,7 +20,7 @@
                             Báo lỗi
                         </button>
                     </div>
-                    @if (count($film->filmDetail) === 0)
+                    @if (sizeof($film->filmDetail) === 0)
                         <div class="alert alert-danger">
                             Không tìm thấy file download của phim này
                         </div>

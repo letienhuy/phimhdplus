@@ -44,7 +44,7 @@
                                     </td>
                                 </tr>
                             @endforeach
-                        @endforeach @if (count($category) === 0)
+                        @endforeach @if (sizeof($category) === 0)
                         <tr>
                             <td colspan="4">Chưa có thể loại nào!</td>
                         </tr>

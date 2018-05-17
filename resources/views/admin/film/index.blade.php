@@ -36,7 +36,7 @@
                                 </a>
                             </td>
                         </tr>
-                        @endforeach @if (count($film) === 0)
+                        @endforeach @if (sizeof($film) === 0)
                         <tr>
                             <td colspan="4">Chưa có phim nào!</td>
                         </tr>
